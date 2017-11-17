@@ -8,4 +8,12 @@
     tools:context="pennypincher.cps496.cmich.edu.pennypincher.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="EnterData"
+        android:text="Button"
+        tools:layout_editor_absoluteX="203dp"
+        tools:layout_editor_absoluteY="115dp" />
 </android.support.constraint.ConstraintLayout>
