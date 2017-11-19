@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="categories">
+        <item>Select a Category</item>
         <item>Electronics</item>
         <item>Food</item>
         <item>Clothes</item>

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -37,9 +38,21 @@ public class Form extends AppCompatActivity {
     }
 
     public void EnterData(View v){
+        Boolean pass = false;
+        int count = 0;
+        if (cat.getSelectedItem().toString().equals("Select a Category")) {
+            Toast.makeText(this,"Please Select a Category",Toast.LENGTH_SHORT).show();
+            count++;
+        }
+
         if (TextUtils.isEmpty(price.getText().toString())) {
-            Log.d("This", "Works");
-        } else {
+            Toast.makeText(this,"Please enter a price.",Toast.LENGTH_SHORT).show();
+            count++;
+        }
+
+        if (count == 0) pass = true;
+
+        if (pass) {
             Double Amount = Double.parseDouble(price.getText().toString());
             Purchase newPurch = new Purchase();
             newPurch.setAmount(Amount);
@@ -54,6 +67,9 @@ public class Form extends AppCompatActivity {
     }
 
     public void setImage(Bitmap image) {
+        /**
+         * Sets ImageView
+         */
         thumb.getLayoutParams().height = 500;
         thumb.getLayoutParams().width = 500;
         thumb.requestLayout();
