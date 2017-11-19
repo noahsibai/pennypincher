@@ -6,4 +6,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string-array name="categories">
+        <item>Electronics</item>
+        <item>Food</item>
+        <item>Clothes</item>
+        <item>Personal Needs</item>
+        <item>Fun Money</item>
+    </string-array>
 </resources>

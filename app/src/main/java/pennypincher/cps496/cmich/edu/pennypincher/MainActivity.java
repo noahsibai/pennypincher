@@ -1,6 +1,7 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -47,22 +48,24 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void EnterData(View v){
-        Double Amount = 15.22;
-        Purchase newPurch = new Purchase();
-        newPurch.setAmount(Amount);
-        newPurch.setCategory("W/e");
-        newPurch.setImagePath("/Img/");
-        newPurch.setTimeOPurch(new Date().toString());
-        Log.d("Amount",newPurch.GetAmount().toString());
-        db.Insert(newPurch);
-        db.GetAllRecords();
-    }
-
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /**
+         * This method grabs the image taken by the user and sends it to the form Activity.
+         */
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Intent form = new Intent(this, Form.class);
+            form.putExtra("BitMap", imageBitmap);
+            startActivity(form);
         }
     }
 
