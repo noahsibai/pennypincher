@@ -25,12 +25,11 @@ public class Form extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-        thumb = (ImageView) findViewById(R.id.thumb);
+        thumb = findViewById(R.id.thumb);
         Intent extras = getIntent();
         setImage((Bitmap)extras.getParcelableExtra("BitMap"));
-        cat = (Spinner) findViewById(R.id.category);
-        price = (EditText) findViewById(R.id.price);
-        Spinner cat = findViewById(R.id.category);
+        cat = findViewById(R.id.category);
+        price = findViewById(R.id.price);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
