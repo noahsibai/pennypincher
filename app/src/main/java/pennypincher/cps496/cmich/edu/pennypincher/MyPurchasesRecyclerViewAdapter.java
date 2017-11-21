@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import pennypincher.cps496.cmich.edu.pennypincher.PurchasesFragment.OnListFragmentInteractionListener;
@@ -42,7 +43,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         holder.mItem = mValues.get(position);
         holder.AmountDisp.setText(mValues.get(position).GetAmount().toString());
         holder.CatDisp.setText(mValues.get(position).GetCategory());
-        holder.ImPath.setText(mValues.get(position).GetImagePath());
+        holder.ImPath.setImageBitmap(mValues.get(position).GetImagePath());
         holder.TOP.setText(mValues.get(position).GetTOP());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         public final View mView;
         public final TextView AmountDisp;
         public final TextView CatDisp;
-        public final TextView ImPath;
+        public final ImageView ImPath;
         public final TextView TOP;
         public Purchase mItem;
 
@@ -75,7 +76,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
             mView = view;
             AmountDisp = (TextView) view.findViewById(R.id.AmountDisp);
             CatDisp = (TextView) view.findViewById(R.id.CatDisp);
-            ImPath = (TextView) view.findViewById(R.id.ImPath);
+            ImPath = (ImageView) view.findViewById(R.id.ImPath);
             TOP = (TextView) view.findViewById(R.id.TOP);
 
         }
@@ -83,7 +84,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         @Override
         public String toString() {
             return super.toString() + " Amount: " + AmountDisp.getText() + " Category: " + CatDisp.getText()
-                    + " ImPath: " + ImPath.getText() + " TOP: " + TOP.getText();
+                    + " ImPath: " + ImPath + " TOP: " + TOP.getText();
         }
     }
 }

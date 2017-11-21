@@ -36,10 +36,10 @@ public class PurchaseContent {
     public static class PurchaseItem {
         public final Double Amount;
         public final String Category;
-        public final String ImPath;
+        public final byte[] ImPath;
         public final String TOP;
 
-        public PurchaseItem(Double Amount,String Category, String ImPath, String TOP) {
+        public PurchaseItem(Double Amount,String Category, byte[] ImPath, String TOP) {
             this.Amount = Amount;
             this.Category = Category;
             this.ImPath = ImPath;

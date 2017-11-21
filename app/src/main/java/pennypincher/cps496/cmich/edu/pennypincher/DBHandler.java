@@ -67,9 +67,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         values.put(KEY_AMOUNT, newPurch.GetAmount());
         values.put(KEY_CATEGORY,newPurch.GetCategory());
-        values.put(KEY_IMG_PATH, newPurch.GetImagePath());
+        values.put(KEY_IMG_PATH, newPurch.GetByteImage());
         values.put(KEY_PURCHASE_DATE, newPurch.GetTOP());
-
         db.insert(BUDGET_TABLE_DETAILS,null,values);
         db.close();
 
@@ -91,7 +90,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 SingPurch = new Purchase();
                 SingPurch.setAmount(cursor.getDouble(0));
                 SingPurch.setCategory(cursor.getString(1));
-                SingPurch.setImagePath(cursor.getString(2));
+                SingPurch.setImagePath(cursor.getBlob(2));
                 SingPurch.setTimeOPurch(cursor.getString(3));
                 Purchases.add(SingPurch);
             }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 public class Form extends AppCompatActivity {
@@ -21,13 +22,15 @@ public class Form extends AppCompatActivity {
     Spinner cat;
     ImageView thumb;
     EditText price;
+    Bitmap img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         thumb = findViewById(R.id.thumb);
         Intent extras = getIntent();
-        setImage((Bitmap)extras.getParcelableExtra("BitMap"));
+        img = extras.getParcelableExtra("BitMap");
+        setImageView(img);
         cat = findViewById(R.id.category);
         price = findViewById(R.id.price);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -56,7 +59,7 @@ public class Form extends AppCompatActivity {
             Purchase newPurch = new Purchase();
             newPurch.setAmount(Amount);
             newPurch.setCategory(cat.getSelectedItem().toString());
-            newPurch.setImagePath("/Img/");
+            newPurch.setImagePath(getBytes(img));
             newPurch.setTimeOPurch(new Date().toString());
             Log.d("Amount",newPurch.GetAmount().toString());
             db.Insert(newPurch);
@@ -65,7 +68,14 @@ public class Form extends AppCompatActivity {
         }
     }
 
-    public void setImage(Bitmap image) {
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+//        byte[] temp = stream.toByteArray();
+        return stream.toByteArray();
+    }
+
+    public void setImageView(Bitmap image) {
         /**
          * Sets ImageView
          */

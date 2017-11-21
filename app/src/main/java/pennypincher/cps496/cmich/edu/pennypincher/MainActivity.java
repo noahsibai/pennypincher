@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -128,9 +128,9 @@ public class MainActivity extends AppCompatActivity
             purch = new PurchasesFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
             Frag.replace(R.id.content,purch).commit();
-        } else if (id == R.id.nav_temp1) {
+        } else if (id == R.id.nav_set_Budget) {
 
-        } else if (id == R.id.nav_temp2) {
+        } else if (id == R.id.nav_set_Budget) {
 
         }
 
