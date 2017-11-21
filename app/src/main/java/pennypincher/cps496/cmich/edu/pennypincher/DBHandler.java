@@ -10,6 +10,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 
+import pennypincher.cps496.cmich.edu.pennypincher.dummy.PurchaseContent;
+
 /**
  * Created by Tony on 11/11/2017.
  */
@@ -77,6 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //Not sure if it is inserting data or not but causes error everytime I get to Categories
     //Log statement.
     public void GetAllRecords(){
+        Log.d("All Records Start","Start");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS,null);
         ArrayList<Purchase> Purchases = new ArrayList<Purchase>();
@@ -94,13 +97,19 @@ public class DBHandler extends SQLiteOpenHelper {
             }
         }
         cursor.close();
+        PurchaseContent.ITEMS.clear();
         for (int i = 0; i < Purchases.size(); i++ ){
-            Log.d("Amt",Double.toString(Purchases.get(i).GetAmount()));
-            Log.d("Cat",Purchases.get(i).GetCategory());
-            Log.d("Img",Purchases.get(i).GetImagePath());
-            Log.d("DOP",Purchases.get(i).GetTOP());
+            PurchaseContent.ITEMS.add(Purchases.get(i));
         }
 
         db.close();
+
+        Log.d("All Records End","End");
+    }
+
+    public void RemoveAllRecords(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(BUDGET_TABLE_DETAILS,null,null);
+        Log.d("Deleted","Deleted Table");
     }
 }

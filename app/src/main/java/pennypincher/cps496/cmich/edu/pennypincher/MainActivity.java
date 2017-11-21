@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,11 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
     DBHandler db = new DBHandler(MainActivity.this,"we",null,1);
+    NavigationView navigationView;
+    HomeFragment home;
+    PurchasesFragment purch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +49,16 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        if(savedInstanceState == null){
+            home = new HomeFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content,home).commit();
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }
+
+        db.GetAllRecords();
     }
 
     private void dispatchTakePictureIntent() {
@@ -108,9 +121,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            home = new HomeFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content,home).commit();
         } else if (id == R.id.nav_receipts) {
-
+            purch = new PurchasesFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content,purch).commit();
         } else if (id == R.id.nav_temp1) {
 
         } else if (id == R.id.nav_temp2) {

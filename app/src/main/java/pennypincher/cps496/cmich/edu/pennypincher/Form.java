@@ -60,7 +60,7 @@ public class Form extends AppCompatActivity {
             newPurch.setTimeOPurch(new Date().toString());
             Log.d("Amount",newPurch.GetAmount().toString());
             db.Insert(newPurch);
-//            db.GetAllRecords();
+            db.GetAllRecords();
             returnHome();
         }
     }
