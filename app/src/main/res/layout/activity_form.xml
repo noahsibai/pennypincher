@@ -58,7 +58,7 @@
         android:ems="10"
         android:inputType="numberDecimal" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,5 +66,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="34dp"
         android:onClick="EnterData"
+        android:src="@drawable/ic_save_black_36dp"
         android:text="Submit" />
 </RelativeLayout>
