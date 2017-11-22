@@ -4,7 +4,7 @@
     <item android:drawable="@color/splashBackground" />
 
     <item>
-        <bitmap android:src="@drawable/icon"
+        <bitmap android:src="@drawable/crabby_splash"
             android:gravity="center" />
 
     </item>
