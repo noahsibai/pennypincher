@@ -65,11 +65,20 @@ public class PurchasesFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
+            //Used to get the orientation of the phone and change the layout accordingly for Divideritem.
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+            
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                                                                             mLayoutManager.getOrientation());
+            //Sets custom drawable for itemDecoration in RecyclerView. (line under each entry)
+            itemDecoration.setDrawable(getResources().getDrawable(R.drawable.custdivide));
+            recyclerView.addItemDecoation(itemDecoration);
+            
             recyclerView.setAdapter(new MyPurchasesRecyclerViewAdapter(PurchaseContent.ITEMS, mListener));
         }
         return view;
