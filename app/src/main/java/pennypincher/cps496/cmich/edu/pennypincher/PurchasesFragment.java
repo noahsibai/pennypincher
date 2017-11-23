@@ -3,6 +3,7 @@ package pennypincher.cps496.cmich.edu.pennypincher;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +78,7 @@ public class PurchasesFragment extends Fragment {
                                                                              mLayoutManager.getOrientation());
             //Sets custom drawable for itemDecoration in RecyclerView. (line under each entry)
             itemDecoration.setDrawable(getResources().getDrawable(R.drawable.custdivide));
-            recyclerView.addItemDecoation(itemDecoration);
+            recyclerView.addItemDecoration(itemDecoration);
             
             recyclerView.setAdapter(new MyPurchasesRecyclerViewAdapter(PurchaseContent.ITEMS, mListener));
         }

@@ -4,7 +4,11 @@ package pennypincher.cps496.cmich.edu.pennypincher;
  * Created by noah on 11/20/17.
  */
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +21,11 @@ import pennypincher.cps496.cmich.edu.pennypincher.dummy.PurchaseContent.Purchase
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link pennypincher.cps496.cmich.edu.pennypincher.PurchaseContent.PurchaseItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurchasesRecyclerViewAdapter.ViewHolder> {
-
     private final List<Purchase> mValues;
     private final OnListFragmentInteractionListener mListener;
 
@@ -39,7 +42,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.AmountDisp.setText(mValues.get(position).GetAmount().toString());
         holder.CatDisp.setText(mValues.get(position).GetCategory());
@@ -52,8 +55,13 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    //mListener.onListFragmentInteraction(holder.mItem);
                 }
+                //Onclick that enlarges the thumbnail to fullscreen activity
+                Context context = v.getContext();
+                Intent intent = new Intent(context,FullscreenActivity.class);
+                Bitmap bit = mValues.get(position).GetImagePath();
+                intent.putExtra("Image", bit);
+                context.startActivity(intent);
             }
         });
     }
