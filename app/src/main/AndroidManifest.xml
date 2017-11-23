@@ -29,6 +29,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Form"></activity>
+        <activity android:name=".FullscreenActivity"></activity>
     </application>
 
 </manifest>

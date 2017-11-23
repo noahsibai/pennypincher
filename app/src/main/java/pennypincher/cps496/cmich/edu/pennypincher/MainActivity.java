@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     HomeFragment home;
     PurchasesFragment purch;
+    BudgetFragment bud;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,8 +130,10 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
             Frag.replace(R.id.content,purch).commit();
         } else if (id == R.id.nav_set_Budget) {
-
-        } else if (id == R.id.nav_set_Budget) {
+            bud = new BudgetFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content,bud).commit();
+        } else if (id == R.id.nav_settings) {
 
         }
 
