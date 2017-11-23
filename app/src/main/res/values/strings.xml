@@ -9,11 +9,13 @@
 
     <string-array name="categories">
         <item>Select a Category</item>
-        <item>Electronics</item>
-        <item>Food</item>
-        <item>Clothes</item>
-        <item>Personal Needs</item>
-        <item>Fun Money</item>
+        <item>Dining</item>
+        <item>Groceries</item>
+        <item>Bills</item>
+        <item>Shopping</item>
+        <item>Entertainment</item>
+        <item>Travel</item>
+        <item>Miscellaneous</item>
     </string-array>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>

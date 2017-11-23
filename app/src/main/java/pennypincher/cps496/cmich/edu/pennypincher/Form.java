@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Form extends AppCompatActivity {
@@ -60,7 +61,9 @@ public class Form extends AppCompatActivity {
             newPurch.setAmount(Amount);
             newPurch.setCategory(cat.getSelectedItem().toString());
             newPurch.setImagePath(getBytes(img));
-            newPurch.setTimeOPurch(new Date().toString());
+            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm a");
+            Date cur = new Date();
+            newPurch.setTimeOPurch(dt.format(cur));
             Log.d("Amount",newPurch.GetAmount().toString());
             db.Insert(newPurch);
             db.GetAllRecords();
@@ -71,7 +74,6 @@ public class Form extends AppCompatActivity {
     public static byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
-//        byte[] temp = stream.toByteArray();
         return stream.toByteArray();
     }
 
