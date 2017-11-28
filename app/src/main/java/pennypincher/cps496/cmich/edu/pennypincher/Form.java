@@ -61,7 +61,7 @@ public class Form extends AppCompatActivity {
             newPurch.setAmount(Amount);
             newPurch.setCategory(cat.getSelectedItem().toString());
             newPurch.setImagePath(getBytes(img));
-            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm a");
+            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
             Date cur = new Date();
             newPurch.setTimeOPurch(dt.format(cur));
             Log.d("Amount",newPurch.GetAmount().toString());
