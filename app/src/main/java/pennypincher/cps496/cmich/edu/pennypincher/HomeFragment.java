@@ -4,9 +4,18 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 //import pennypincher.cps496.cmich.edu.pennypincher.R;
 
@@ -53,6 +62,10 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
+    ArrayList<CategoryInfo> catArray;
+    DBHandler db;
+    TableLayout tab;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +78,31 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        Context mContext = v.getContext();
+        tab = (TableLayout) v.findViewById(R.id.Table);
+        catArray = db.CategoryInfo();
+        StringBuilder Sbuilder = new StringBuilder();
+        for(int i = 0; i < catArray.size();i++){
+            Log.d("catArray" + i,"Category: " + catArray.get(i).getCategory() + " Amount: " + catArray.get(i).getAmount());
+            Sbuilder.append("Category: " + catArray.get(i).getCategory()).append(" Amount: " + catArray.get(i).getAmount());
+        }
+
+        for(int i = 0; i < catArray.size(); i++){
+            TableRow tr = new TableRow(mContext);
+            TextView tv = new TextView(mContext);
+            TextView tv2 = new TextView(mContext);
+            tv.setText(catArray.get(i).getCategory());
+            tv2.setText(String.format("%.2f",catArray.get(i).getAmount()));
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PT,15);
+            tv2.setTextSize(TypedValue.COMPLEX_UNIT_PT, 15);
+            tr.addView(tv);
+            tr.addView(tv2);
+            tab.addView(tr);
+        }
+
         return v;
     }
 
@@ -84,6 +120,7 @@ public class HomeFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
         }
+        db = new DBHandler(getActivity(),"we",null,1);
     }
 
     @Override

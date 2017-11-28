@@ -106,9 +106,38 @@ public class DBHandler extends SQLiteOpenHelper {
         Log.d("All Records End","End");
     }
 
+    public ArrayList<CategoryInfo> CategoryInfo(){
+        ArrayList<CategoryInfo> CatList = new ArrayList<CategoryInfo>();
+        CategoryInfo SingInfo;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT Category, SUM(Amount) FROM " + BUDGET_TABLE_DETAILS
+                + " GROUP BY Category",null);
+
+        CatList.clear();
+        if(cursor.getCount() > 0){
+            for(int i = 0; i < cursor.getCount(); i++){
+                SingInfo = new CategoryInfo();
+                cursor.moveToNext();
+                SingInfo.setAmount(cursor.getDouble(1));
+                SingInfo.setCategory(cursor.getString(0));
+                CatList.add(SingInfo);
+            }
+        }
+
+        for(int i = 0; i < CatList.size(); i++){
+            Log.d("catList" + i,"Category: " + CatList.get(i).getCategory() + " Amount: " + CatList.get(i).getAmount());
+        }
+
+
+        return CatList;
+    }
+
     public void RemoveAllRecords(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(BUDGET_TABLE_DETAILS,null,null);
         Log.d("Deleted","Deleted Table");
     }
+
+
 }
