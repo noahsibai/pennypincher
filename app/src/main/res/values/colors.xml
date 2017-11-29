@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#26cc42</color>
     <color name="colorPrimaryDark">#66865b</color>
     <color name="colorAccent">#183e18</color>
     <color name="colorIcon">#66865b</color>
     <color name="splashBackground">#92fcca</color>
+    <color name="bgcolor">#beadad</color>
+    <color name="card">#e9e9e9</color>
+    <color name="chcard">#9c9c9c</color>
     <color name="black_overlay">#66000000</color>
 </resources>
