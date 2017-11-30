@@ -1,0 +1,13 @@
+Give it a name - Penny Pincher
+	Type of App
+		Category
+		Content Rating
+	Choose location for app.
+`	Description for the app - Tagline
+	Full Description of app - Paragraph
+	
+	Grapic Assest:
+		Screen Shots(At least two):
+		High Res Icon: 512x512 PNG 
+
+	Needs Signed APK
