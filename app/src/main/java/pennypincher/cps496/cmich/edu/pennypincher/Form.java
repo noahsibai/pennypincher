@@ -2,6 +2,7 @@ package pennypincher.cps496.cmich.edu.pennypincher;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +32,10 @@ public class Form extends AppCompatActivity {
         thumb = findViewById(R.id.thumb);
         Intent extras = getIntent();
         img = extras.getParcelableExtra("BitMap");
+
+        if (img == null) {
+            img = BitmapFactory.decodeResource(Form.this.getResources(), R.drawable.nopictureoption);
+        }
         setImageView(img);
         cat = findViewById(R.id.category);
         price = findViewById(R.id.price);

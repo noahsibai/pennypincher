@@ -6,8 +6,8 @@
     android:name="pennypincher.cps496.cmich.edu.pennypincher.PurchasesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="-50dp"
+    android:layout_marginRight="-50dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="pennypincher.cps496.cmich.edu.pennypincher.PurchasesFragment"
     tools:listitem="@layout/fragment_purchases" />

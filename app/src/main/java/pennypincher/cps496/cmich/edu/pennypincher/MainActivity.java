@@ -1,11 +1,12 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -17,20 +18,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-    DBHandler db = new DBHandler(MainActivity.this,"we",null,1);
+    DBHandler db = new DBHandler(MainActivity.this, "we", null, 1);
+    BudgetDBHandler bdb = new BudgetDBHandler(MainActivity.this, "we", null, 1);
     NavigationView navigationView;
     HomeFragment home;
     PurchasesFragment purch;
     BudgetFragment bud;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,12 +48,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        FloatingActionButton fab2 = findViewById(R.id.fab2);
         fab2.setImageResource(R.drawable.ic_no_camera_24);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                dispatchTakePictureIntent();
+                Context c = view.getContext();
+                Intent form = new Intent(c, Form.class);
+                startActivity(form);
             }
         });
 
@@ -63,14 +67,15 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             home = new HomeFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-            Frag.replace(R.id.content,home).commit();
+            Frag.replace(R.id.content, home).commit();
             navigationView.getMenu().getItem(0).setChecked(true);
         }
 
         db.GetAllRecords();
+        System.out.println(bdb.GetAllRecords());
     }
 
     private void dispatchTakePictureIntent() {
@@ -78,6 +83,16 @@ public class MainActivity extends AppCompatActivity
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    public void EnterData(View v) {
+        double amount = Double.parseDouble(bud.amount.getText().toString());
+        SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
+        Date cur = new Date();
+        Budget newBud = new Budget(amount, dt.format(cur));
+        Log.d("Amount", String.valueOf(newBud.GetAmount()));
+        bdb.Insert(newBud);
+        bdb.GetAllRecords();
     }
 
     @Override
@@ -135,15 +150,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             home = new HomeFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-            Frag.replace(R.id.content,home).commit();
+            Frag.replace(R.id.content, home).commit();
         } else if (id == R.id.nav_receipts) {
             purch = new PurchasesFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-            Frag.replace(R.id.content,purch).commit();
+            Frag.replace(R.id.content, purch).commit();
         } else if (id == R.id.nav_set_Budget) {
             bud = new BudgetFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-            Frag.replace(R.id.content,bud).commit();
+            Frag.replace(R.id.content, bud).commit();
         } else if (id == R.id.nav_settings) {
 
         }

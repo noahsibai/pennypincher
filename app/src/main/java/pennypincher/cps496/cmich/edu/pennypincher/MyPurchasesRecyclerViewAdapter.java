@@ -46,24 +46,27 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         holder.mItem = mValues.get(position);
         holder.AmountDisp.setText(mValues.get(position).GetAmount().toString());
         holder.CatDisp.setText(mValues.get(position).GetCategory());
+        holder.ImPath.getLayoutParams().height = 800;
+        holder.ImPath.getLayoutParams().width = 800;
+        holder.ImPath.requestLayout();
         holder.ImPath.setImageBitmap(mValues.get(position).GetImagePath());
         holder.TOP.setText(mValues.get(position).GetTOP());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                }
-                //Onclick that enlarges the thumbnail to fullscreen activity
-                Context context = v.getContext();
-                Intent intent = new Intent(context,FullscreenActivity.class);
-                Bitmap bit = mValues.get(position).GetImagePath();
-                intent.putExtra("Image", bit);
-                context.startActivity(intent);
-            }
-        });
+//        holder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (null != mListener) {
+//                    // Notify the active callbacks interface (the activity, if the
+//                    // fragment is attached to one) that an item has been selected.
+//                }
+//                //Onclick that enlarges the thumbnail to fullscreen activity
+//                Context context = v.getContext();
+//                Intent intent = new Intent(context,FullscreenActivity.class);
+//                Bitmap bit = mValues.get(position).GetImagePath();
+//                intent.putExtra("Image", bit);
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
