@@ -1,4 +1,5 @@
 package pennypincher.cps496.cmich.edu.pennypincher.dummy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +34,14 @@ public class PurchaseContent {
     private static PurchaseItem createPurchaseItem(PurchaseItem PItem) {
         return PItem;
     }
+
     public static class PurchaseItem {
         public final Double Amount;
         public final String Category;
         public final byte[] ImPath;
         public final String TOP;
 
-        public PurchaseItem(Double Amount,String Category, byte[] ImPath, String TOP) {
+        public PurchaseItem(Double Amount, String Category, byte[] ImPath, String TOP) {
             this.Amount = Amount;
             this.Category = Category;
             this.ImPath = ImPath;

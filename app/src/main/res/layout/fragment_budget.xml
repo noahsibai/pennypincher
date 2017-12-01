@@ -1,16 +1,16 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="pennypincher.cps496.cmich.edu.pennypincher.MainActivity">
 
     <!--This will display when there is no budget set or if it is set to zero-->
     <RelativeLayout
+        android:id="@+id/setBud"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:id="@+id/setBud"
         android:visibility="invisible">
 
         <TextView
@@ -44,18 +44,18 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="34dp"
-            android:text="Submit"
-            android:onClick="enterData" />
+            android:onClick="enterData"
+            android:text="Submit" />
 
 
     </RelativeLayout>
 
     <!--This will show when a budget is set and not equal to zero-->
     <RelativeLayout
+        android:id="@+id/showBud"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:id="@+id/showBud"
         android:visibility="invisible">
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="34dp"
-            android:onClick="ClearDB"
+            android:onClick="ClearBudget"
             android:text="Delete Budget" />
 
 

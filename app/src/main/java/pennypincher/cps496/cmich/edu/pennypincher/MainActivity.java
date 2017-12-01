@@ -1,31 +1,26 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -38,12 +33,13 @@ public class MainActivity extends AppCompatActivity
     HomeFragment home;
     PurchasesFragment purch;
     BudgetFragment bud;
+    SettingsFragment set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -109,13 +105,63 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public void ClearBudget(View v) {
+        new AlertDialog.Builder(this)
+                .setTitle("Warning!")
+                .setMessage("Do you really want to to delete this budget?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        bdb.RemoveAllRecords();
+                        bud = new BudgetFragment();
+                        FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+                        Frag.replace(R.id.content, bud).commit();
+                        db.GetAllRecords();
+                        Toast.makeText(MainActivity.this, "Budget has been deleted.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MainActivity.this,
+                                "Budget not deleted",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+
+    }
+
     public void ClearDB(View v) {
-        bdb.RemoveAllRecords();
-        db.RemoveAllRecords();
-        bud = new BudgetFragment();
-        FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
-        Frag.replace(R.id.content, bud).commit();
-        db.GetAllRecords();
+        new AlertDialog.Builder(this)
+                .setTitle("Warning!")
+                .setMessage("Do you really want to to delete the entire of the Database" +
+                        " If you do you will lose all of your receipts and budget as well.")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        bdb.RemoveAllRecords();
+                        db.RemoveAllRecords();
+                        home = new HomeFragment();
+                        FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+                        Frag.replace(R.id.content, home).commit();
+                        db.GetAllRecords();
+                        Toast.makeText(MainActivity.this, "Budget and receipts" +
+                                        " has been deleted.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(MainActivity.this,
+                                "Budget and receipts not deleted",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+
     }
 
     @Override
@@ -183,7 +229,9 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
             Frag.replace(R.id.content, bud).commit();
         } else if (id == R.id.nav_settings) {
-
+            set = new SettingsFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content, set).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
