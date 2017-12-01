@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="pennypincher.cps496.cmich.edu.pennypincher.BudgetFragment">
+    tools:context="pennypincher.cps496.cmich.edu.pennypincher.MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!--This will display when there is no budget set or if it is set to zero-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:id="@+id/setBud"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/textView2"
@@ -24,18 +26,6 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="34dp"
-            android:onClick="EnterData"
-            android:text="Submit" />
-        <!--android:src="@drawable/ic_save_black_36dp"-->
-
         <EditText
             android:id="@+id/budAmount"
             android:layout_width="wrap_content"
@@ -46,6 +36,50 @@
             android:layout_toEndOf="@+id/textView2"
             android:ems="10"
             android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="34dp"
+            android:text="Submit"
+            android:onClick="enterData" />
+
+
+    </RelativeLayout>
+
+    <!--This will show when a budget is set and not equal to zero-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/showBud"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button2"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="174dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="34dp"
+            android:onClick="ClearDB"
+            android:text="Delete Budget" />
 
 
     </RelativeLayout>

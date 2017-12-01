@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -18,8 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -40,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        FloatingActionButton fab2 = findViewById(R.id.fab2);
+        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab2);
         fab2.setImageResource(R.drawable.ic_no_camera_24);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity
                 Context c = view.getContext();
                 Intent form = new Intent(c, Form.class);
                 startActivity(form);
+
             }
         });
 
@@ -85,14 +92,30 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void EnterData(View v) {
+    public void enterData(View v) {
         double amount = Double.parseDouble(bud.amount.getText().toString());
-        SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
-        Date cur = new Date();
-        Budget newBud = new Budget(amount, dt.format(cur));
-        Log.d("Amount", String.valueOf(newBud.GetAmount()));
-        bdb.Insert(newBud);
-        bdb.GetAllRecords();
+        System.out.println(amount);
+        if (amount == 0) {
+            Toast.makeText(this, "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
+        } else {
+            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
+            Date cur = new Date();
+            Budget newBud = new Budget(amount, dt.format(cur));
+            bdb.Insert(newBud);
+            System.out.println(bdb.GetAllRecords());
+            bud = new BudgetFragment();
+            FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+            Frag.replace(R.id.content, bud).commit();
+        }
+    }
+
+    public void ClearDB(View v) {
+        bdb.RemoveAllRecords();
+        db.RemoveAllRecords();
+        bud = new BudgetFragment();
+        FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
+        Frag.replace(R.id.content, bud).commit();
+        db.GetAllRecords();
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,7 @@ public class BudgetFragment extends Fragment {
     BudgetDBHandler bdb;
     EditText amount;
     View v;
+    TextView curBud;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,13 +37,8 @@ public class BudgetFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
-
-    public BudgetFragment() {
-        // Required empty public constructor
-    }
-
+    public BudgetFragment() {}
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -76,6 +73,17 @@ public class BudgetFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_budget, container, false);
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
         amount = v.findViewById(R.id.budAmount);
+        curBud = v.findViewById(R.id.textView3);
+        if (bdb.GetAllRecords() == 0){
+            System.out.println("set" + bdb.GetAllRecords());
+            v.findViewById(R.id.setBud).setVisibility(v.VISIBLE);
+            v.findViewById(R.id.showBud).setVisibility(v.INVISIBLE);
+        } else {
+            System.out.println("show");
+            v.findViewById(R.id.setBud).setVisibility(v.INVISIBLE);
+            v.findViewById(R.id.showBud).setVisibility(v.VISIBLE);
+        }
+        curBud.setText("Current Budget: " + bdb.GetAllRecords());
         return v;
     }
 

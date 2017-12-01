@@ -42,7 +42,6 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + BUDGET_TABLE_DETAILS + "("
                 + KEY_BUDGET_AMOUNT + " REAL,"
                 + KEY_PURCHASE_DATE + " TEXT PRIMARY KEY)";
-
         db.execSQL(CREATE_TABLE);
     }
 
@@ -50,38 +49,36 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int OldVersion, int NewVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + BUDGET_TABLE_DETAILS);
         onCreate(db);
-
     }
 
     public void Insert(Budget newBudget){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(KEY_BUDGET_AMOUNT, newBudget.GetAmount());
         values.put(KEY_PURCHASE_DATE, newBudget.GetDate());
         db.insert(BUDGET_TABLE_DETAILS,null,values);
         db.close();
-
         Log.d("Budget",newBudget.toString());
-
     }
-    //Not sure if it is inserting data or not but causes error everytime I get to Categories
-    //Log statement.
-    public String GetAllRecords(){
+
+    public double GetAllRecords(){
         Log.d("All Records Start","Start");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS,null);
         String out = "Fails";
+        double retVal = 0;
         if(cursor.getCount() > 0) {
             cursor.moveToNext();
+            retVal = cursor.getDouble(0);
             Budget budget = new Budget(cursor.getDouble(0), cursor.getString(1));
             cursor.close();
             db.close();
-            out = ToString(budget);
+            System.out.println(ToString(budget));
             Log.d("All Records End","End");
+            return retVal;
         }
-        return out;
+        return 0;
 
     }
 
@@ -89,7 +86,6 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
         String c = budget.GetAmount() + " " + budget.GetDate();
         return c;
     }
-
 
     public void RemoveAllRecords(){
         SQLiteDatabase db = this.getWritableDatabase();
