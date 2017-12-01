@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -90,13 +91,18 @@ public class MainActivity extends AppCompatActivity
 
     public void enterData(View v) {
         double amount = Double.parseDouble(bud.amount.getText().toString());
-        System.out.println(amount);
+        int month =  Integer.parseInt(bud.months.getText().toString());
+        int weeks =  Integer.parseInt(bud.weeks.getText().toString());
+        int days =  Integer.parseInt(bud.days.getText().toString());
         if (amount == 0) {
             Toast.makeText(this, "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
         } else {
-            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
-            Date cur = new Date();
-            Budget newBud = new Budget(amount, dt.format(cur));
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, month);
+            calendar.add(Calendar.DATE, (weeks*7) + days);
+            Date nextMonthFirstDay = calendar.getTime();
+            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
+            Budget newBud = new Budget(amount, dt.format(nextMonthFirstDay));
             bdb.Insert(newBud);
             System.out.println(bdb.GetAllRecords());
             bud = new BudgetFragment();

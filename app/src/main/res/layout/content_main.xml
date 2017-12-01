@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="pennypincher.cps496.cmich.edu.pennypincher.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:background="@color/dark_slate_gray">
 
     <FrameLayout
         android:id="@+id/content"

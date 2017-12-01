@@ -62,7 +62,7 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
         Log.d("Budget",newBudget.toString());
     }
 
-    public double GetAllRecords(){
+    public Budget GetAllRecords(){
         Log.d("All Records Start","Start");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS,null);
@@ -76,9 +76,9 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
             db.close();
             System.out.println(ToString(budget));
             Log.d("All Records End","End");
-            return retVal;
+            return budget;
         }
-        return 0;
+        return new Budget();
 
     }
 

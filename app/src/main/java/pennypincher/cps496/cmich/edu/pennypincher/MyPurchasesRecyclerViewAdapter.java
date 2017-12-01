@@ -18,6 +18,10 @@ import android.widget.TextView;
 import pennypincher.cps496.cmich.edu.pennypincher.PurchasesFragment.OnListFragmentInteractionListener;
 import pennypincher.cps496.cmich.edu.pennypincher.dummy.PurchaseContent.PurchaseItem;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,14 +48,23 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
-        holder.AmountDisp.setText(mValues.get(position).GetAmount().toString());
-        holder.CatDisp.setText(mValues.get(position).GetCategory());
+        String temp = String.format("Price: $%.2f", mValues.get(position).GetAmount());
+        holder.AmountDisp.setText(temp);
+        holder.CatDisp.setText("Category: " + mValues.get(position).GetCategory());
         holder.ImPath.getLayoutParams().height = 800;
         holder.ImPath.getLayoutParams().width = 800;
         holder.ImPath.requestLayout();
         holder.ImPath.setImageBitmap(mValues.get(position).GetImagePath());
-        holder.TOP.setText(mValues.get(position).GetTOP());
-
+        DateFormat df = new SimpleDateFormat("MM-dd-yy");
+        String check = mValues.get(position).GetTOP();
+        Date tmp = new Date();
+        try {
+            tmp = df.parse(check);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat dt = (SimpleDateFormat) df;
+        holder.TOP.setText("Date Logged: " + dt.format(tmp));
 //        holder.mView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

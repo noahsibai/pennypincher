@@ -13,16 +13,9 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/TOP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="30dp" />
+        android:background="@color/dark_slate_gray"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ImPath"
@@ -32,11 +25,21 @@
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <TextView
+            android:id="@+id/TOP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+        <TextView
             android:id="@+id/AmountDisp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@android:color/white"
             android:textSize="30dp" />
 
         <TextView
@@ -45,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@android:color/white"
             android:textSize="30dp" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

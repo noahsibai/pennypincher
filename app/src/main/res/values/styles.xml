@@ -30,7 +30,7 @@
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">@color/dark_slate_gray</item>
     </style>
 
 </resources>

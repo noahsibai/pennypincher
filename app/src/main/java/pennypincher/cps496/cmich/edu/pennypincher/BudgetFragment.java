@@ -27,6 +27,9 @@ public class BudgetFragment extends Fragment {
 
     BudgetDBHandler bdb;
     EditText amount;
+    EditText months;
+    EditText weeks;
+    EditText days;
     View v;
     TextView curBud;
     // TODO: Rename parameter arguments, choose names that match
@@ -73,17 +76,19 @@ public class BudgetFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_budget, container, false);
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
         amount = v.findViewById(R.id.budAmount);
+        months = v.findViewById(R.id.months);
+        weeks = v.findViewById(R.id.weeks);
+        days = v.findViewById(R.id.days);
         curBud = v.findViewById(R.id.textView3);
-        if (bdb.GetAllRecords() == 0){
-            System.out.println("set" + bdb.GetAllRecords());
+        Budget bud = bdb.GetAllRecords();
+        if (bud.GetAmount() == 0){
             v.findViewById(R.id.setBud).setVisibility(v.VISIBLE);
             v.findViewById(R.id.showBud).setVisibility(v.INVISIBLE);
         } else {
-            System.out.println("show");
             v.findViewById(R.id.setBud).setVisibility(v.INVISIBLE);
             v.findViewById(R.id.showBud).setVisibility(v.VISIBLE);
         }
-        curBud.setText("Current Budget: " + bdb.GetAllRecords());
+        curBud.setText("Current Budget: " + bud.GetAmount());
         return v;
     }
 
