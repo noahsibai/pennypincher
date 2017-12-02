@@ -1,11 +1,15 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -15,15 +19,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -35,6 +45,12 @@ public class MainActivity extends AppCompatActivity
     PurchasesFragment purch;
     BudgetFragment bud;
     SettingsFragment set;
+    Date dtPicked;
+    int year;
+    int month;
+    int day;
+    boolean datePicked = false;
+    static final int DIALOG_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +58,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,16 +74,13 @@ public class MainActivity extends AppCompatActivity
                 Context c = view.getContext();
                 Intent form = new Intent(c, Form.class);
                 startActivity(form);
-
             }
         });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         if (savedInstanceState == null) {
@@ -78,6 +90,10 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().getItem(0).setChecked(true);
         }
 
+        final Calendar cal = Calendar.getInstance();
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH);
+        day = cal.get(Calendar.DAY_OF_MONTH);
         db.GetAllRecords();
         System.out.println(bdb.GetAllRecords());
     }
@@ -89,22 +105,61 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void openDate(View v) {
+        showDialog(DIALOG_ID);
+    }
+
+    protected Dialog onCreateDialog(int id) {
+        if (id == DIALOG_ID) {
+            return new DatePickerDialog(this, dpickerListner, year, month, day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener dpickerListner =
+            new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    year = year;
+                    month = month + 1;
+                    day = day;
+                    DateFormat df = new SimpleDateFormat("MM-dd-yy");
+                    String check = month + "-" + day + "-" + year;
+                    try {
+                        dtPicked = df.parse(check);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    datePicked = true;
+                    TextView dateSelected = bud.getActivity().findViewById(R.id.dateSelected);
+                    dateSelected.setText(check);
+                }
+            };
+
+
     public void enterData(View v) {
-        double amount = Double.parseDouble(bud.amount.getText().toString());
-        int month =  Integer.parseInt(bud.months.getText().toString());
-        int weeks =  Integer.parseInt(bud.weeks.getText().toString());
-        int days =  Integer.parseInt(bud.days.getText().toString());
-        if (amount == 0) {
-            Toast.makeText(this, "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
-        } else {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH, month);
-            calendar.add(Calendar.DATE, (weeks*7) + days);
-            Date nextMonthFirstDay = calendar.getTime();
+        Boolean pass = false;
+        int count = 0;
+
+        if (TextUtils.isEmpty(bud.amount.getText().toString())) {
+            Toast.makeText(bud.getContext(), "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
+            count++;
+        }
+        if (!datePicked){
+            Toast.makeText(bud.getContext(), "Please Select a date", Toast.LENGTH_SHORT);
+            count++;
+        }
+        if (count ==0 ) pass = true;
+        if (pass) {
+            double amount = Double.parseDouble(bud.amount.getText().toString());
             SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
-            Budget newBud = new Budget(amount, dt.format(nextMonthFirstDay));
+            System.out.println(dt.format(dtPicked));
+            Budget newBud = new Budget(amount, dt.format(dtPicked));
+
             bdb.Insert(newBud);
             System.out.println(bdb.GetAllRecords());
+            datePicked = false;
             bud = new BudgetFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
             Frag.replace(R.id.content, bud).commit();

@@ -36,40 +36,9 @@
             android:layout_marginStart="28dp"
             android:layout_toEndOf="@+id/textView2"
             android:ems="10"
+            android:inputType="numberDecimal"
             android:textColor="@android:color/white"
-            android:inputType="numberDecimal" />
-
-        <EditText
-            android:id="@+id/months"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/budAmount"
-            android:layout_marginTop="25dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/weeks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/months"
-            android:layout_marginTop="21dp"
-            android:layout_toEndOf="@+id/textView2"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/days"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/weeks"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/button"
@@ -80,6 +49,42 @@
             android:layout_marginBottom="34dp"
             android:onClick="enterData"
             android:text="Submit" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="136dp"
+            android:onClick="openDate"
+            android:text="Select Date" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button3"
+            android:layout_marginBottom="65dp"
+            android:layout_marginEnd="22dp"
+            android:layout_toStartOf="@+id/button3"
+            android:text="Date Selected:"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_marginBottom="11dp"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@+id/button3"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
 
 
     </RelativeLayout>

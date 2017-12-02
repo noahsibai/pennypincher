@@ -1,5 +1,6 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,11 +29,9 @@ public class BudgetFragment extends Fragment {
 
     BudgetDBHandler bdb;
     EditText amount;
-    EditText months;
-    EditText weeks;
-    EditText days;
     View v;
     TextView curBud;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,9 +76,6 @@ public class BudgetFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_budget, container, false);
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
         amount = v.findViewById(R.id.budAmount);
-        months = v.findViewById(R.id.months);
-        weeks = v.findViewById(R.id.weeks);
-        days = v.findViewById(R.id.days);
         curBud = v.findViewById(R.id.textView3);
         Budget bud = bdb.GetAllRecords();
         if (bud.GetAmount() == 0){
