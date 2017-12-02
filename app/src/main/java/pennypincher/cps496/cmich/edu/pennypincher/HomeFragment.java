@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
 
     double total_spent = 0;
     BudgetDBHandler bdb;
+    TextView totperc;
 
 
     @Override
@@ -89,9 +90,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
-//        HorizontalBarChart
-
 
 
 
@@ -124,9 +122,14 @@ public class HomeFragment extends Fragment {
 
         Budget t = bdb.GetAllRecords();
         progress1 = v.findViewById(R.id.progress_1);
-//        get the percentage
+//        set the percentage
+        double perc = (total_spent / ((float)(t.GetAmount()))) * 100;
+        totperc = v.findViewById(R.id.PERCENT);
+        totperc.setText(String.format("%.0f", perc) + " %");
+
         progress1.setMax((float)(t.GetAmount()));
-        progress1.setProgress((float)(total_spent)-5);
+        int buf = (int)((float)(total_spent) * .95);
+        progress1.setProgress(buf);
         progress1.setSecondaryProgress((float)(total_spent));
 
 
