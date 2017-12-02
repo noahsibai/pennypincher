@@ -3,6 +3,9 @@ package pennypincher.cps496.cmich.edu.pennypincher;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,13 +21,16 @@ import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import es.dmoral.toasty.Toasty;
+
 public class Form extends AppCompatActivity {
 
-    DBHandler db = new DBHandler(Form.this,"we",null,1);
+    DBHandler db = new DBHandler(Form.this, "we", null, 1);
     Spinner cat;
     ImageView thumb;
     EditText price;
     Bitmap img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +49,28 @@ public class Form extends AppCompatActivity {
                 R.array.categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cat.setAdapter(adapter);
+        Toasty.Config.getInstance()
+                .setErrorColor(Color.RED)
+                .setInfoColor(Color.BLUE)
+                .setSuccessColor(Color.GREEN)
+                .setWarningColor(Color.YELLOW)
+                .setTextColor(Color.WHITE)
+                .tintIcon(false)
+                .setTextSize(20).apply();
     }
 
-    public void EnterData(View v){
+    public void EnterData(View v) {
         Boolean pass = false;
         int count = 0;
         if (cat.getSelectedItem().toString().equals("Select a Category")) {
-            Toast.makeText(this,"Please Select a Category",Toast.LENGTH_SHORT).show();
+            Toasty.error(this, "Please Select a Category",
+                    Toast.LENGTH_SHORT, true).show();
             count++;
         }
 
         if (TextUtils.isEmpty(price.getText().toString())) {
-            Toast.makeText(this,"Please enter a price.",Toast.LENGTH_SHORT).show();
+            Toasty.error(this, "Please enter a price.",
+                    Toast.LENGTH_SHORT, true).show();
             count++;
         }
 
@@ -69,9 +85,11 @@ public class Form extends AppCompatActivity {
             SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
             Date cur = new Date();
             newPurch.setTimeOPurch(dt.format(cur));
-            Log.d("Amount",newPurch.GetAmount().toString());
+            Log.d("Amount", newPurch.GetAmount().toString());
             db.Insert(newPurch);
             db.GetAllRecords();
+            Toasty.success(this, "Submited.",
+                    Toast.LENGTH_SHORT, true).show();
             returnHome();
         }
     }
@@ -92,7 +110,7 @@ public class Form extends AppCompatActivity {
         thumb.setImageBitmap(image);
     }
 
-    public void returnHome(){
+    public void returnHome() {
         /**
          * When the user taps the Submit button it will send them back to the MainActivity.
          */

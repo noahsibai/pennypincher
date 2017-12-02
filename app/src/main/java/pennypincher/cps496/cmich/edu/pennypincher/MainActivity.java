@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -32,6 +33,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import es.dmoral.toasty.Toasty;
 
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity
@@ -96,6 +99,14 @@ public class MainActivity extends AppCompatActivity
         day = cal.get(Calendar.DAY_OF_MONTH);
         db.GetAllRecords();
         System.out.println(bdb.GetAllRecords());
+        Toasty.Config.getInstance()
+                .setErrorColor(Color.RED)
+                .setInfoColor(Color.BLUE)
+                .setSuccessColor(Color.GREEN)
+                .setWarningColor(Color.YELLOW)
+                .setTextColor(Color.WHITE)
+                .tintIcon(false)
+                .setTextSize(20).apply();
     }
 
     private void dispatchTakePictureIntent() {
@@ -143,11 +154,15 @@ public class MainActivity extends AppCompatActivity
         int count = 0;
 
         if (TextUtils.isEmpty(bud.amount.getText().toString())) {
-            Toast.makeText(bud.getContext(), "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
+            Toasty.error(this, "Please enter a number for Set Budget.",
+                    Toast.LENGTH_SHORT, true).show();
+//            Toast.makeText(bud.getContext(), "Please enter a number for Set Budget.", Toast.LENGTH_SHORT);
             count++;
         }
         if (!datePicked){
-            Toast.makeText(bud.getContext(), "Please Select a date", Toast.LENGTH_SHORT);
+            Toasty.error(this, "Please Select a date.",
+                    Toast.LENGTH_SHORT, true).show();
+//            Toast.makeText(bud.getContext(), "Please Select a date", Toast.LENGTH_SHORT);
             count++;
         }
         if (count ==0 ) pass = true;
@@ -156,10 +171,11 @@ public class MainActivity extends AppCompatActivity
             SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
             System.out.println(dt.format(dtPicked));
             Budget newBud = new Budget(amount, dt.format(dtPicked));
-
             bdb.Insert(newBud);
             System.out.println(bdb.GetAllRecords());
             datePicked = false;
+            Toasty.success(this, "Budget Set.",
+                    Toast.LENGTH_SHORT, true).show();
             bud = new BudgetFragment();
             FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
             Frag.replace(R.id.content, bud).commit();
@@ -179,16 +195,16 @@ public class MainActivity extends AppCompatActivity
                         FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
                         Frag.replace(R.id.content, bud).commit();
                         db.GetAllRecords();
-                        Toast.makeText(MainActivity.this, "Budget has been deleted.",
-                                Toast.LENGTH_SHORT).show();
+                        Toasty.success(MainActivity.this, "Budget has been deleted.",
+                                Toast.LENGTH_SHORT, true).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this,
-                                "Budget not deleted",
-                                Toast.LENGTH_SHORT).show();
+                        Toasty.warning(MainActivity.this, "Budget not deleted",
+                                Toast.LENGTH_SHORT, true).show();
+
                     }
                 }).show();
 
@@ -209,17 +225,17 @@ public class MainActivity extends AppCompatActivity
                         FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
                         Frag.replace(R.id.content, home).commit();
                         db.GetAllRecords();
-                        Toast.makeText(MainActivity.this, "Budget and receipts" +
+                        Toasty.success(MainActivity.this, "Budget and receipts" +
                                         " has been deleted.",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_SHORT, true).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(MainActivity.this,
+                        Toasty.warning(MainActivity.this,
                                 "Budget and receipts not deleted",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_SHORT, true).show();
                     }
                 }).show();
 
