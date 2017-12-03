@@ -19,7 +19,8 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -187,10 +188,11 @@ public class HomeFragment extends Fragment {
         tvC1cat7 = v.findViewById(R.id.tv13);
         tvC1perc7 = v.findViewById(R.id.tv14);
 
-
-
+        Collections.sort(catArray, new CustomComparator());
+        Collections.reverse(catArray);
 
         if (1 <= catArray.size()) {
+            v.findViewById(R.id.p0).setVisibility(View.VISIBLE);
         tvC1cat.setText(catArray.get(0).getCategory());
         double perc1 = ((catArray.get(0).getAmount()) / total_spent) * 100;
         Log.d("key ",String.format("%.0f", perc1));
@@ -202,7 +204,8 @@ public class HomeFragment extends Fragment {
         pb.setProgress((int)(perc1));        }
 
         if (2 <= catArray.size()) {
-        tvC1cat2.setText(catArray.get(1).getCategory());
+            v.findViewById(R.id.p1).setVisibility(View.VISIBLE);
+            tvC1cat2.setText(catArray.get(1).getCategory());
         double perc2 = ((catArray.get(1).getAmount()) / total_spent) * 100;
         tvC1perc2.setText(String.format("%.0f", perc2) + " %");
 //        cat 2
@@ -212,7 +215,8 @@ public class HomeFragment extends Fragment {
         pb2.setProgress((int)(perc2));      }
 
         if (3 <= catArray.size()) {
-        tvC1cat3.setText(catArray.get(2).getCategory());
+            v.findViewById(R.id.p2).setVisibility(View.VISIBLE);
+            tvC1cat3.setText(catArray.get(2).getCategory());
         double perc3 = ((catArray.get(2).getAmount()) / total_spent) * 100;
         tvC1perc3.setText(String.format("%.0f", perc3) + " %");
 //        cat 3
@@ -222,7 +226,8 @@ public class HomeFragment extends Fragment {
         pb3.setProgress((int)(perc3));        }
 
         if (4 <= catArray.size()) {
-        tvC1cat4.setText(catArray.get(3).getCategory());
+            v.findViewById(R.id.p3).setVisibility(View.VISIBLE);
+            tvC1cat4.setText(catArray.get(3).getCategory());
         double perc4 = ((catArray.get(3).getAmount()) / total_spent) * 100;
         tvC1perc4.setText(String.format("%.0f", perc4) + " %");
 //        cat 4
@@ -232,7 +237,8 @@ public class HomeFragment extends Fragment {
         pb4.setProgress((int)(perc4));       }
 
         if (5 <= catArray.size()) {
-        tvC1cat5.setText(catArray.get(4).getCategory());
+            v.findViewById(R.id.p4).setVisibility(View.VISIBLE);
+            tvC1cat5.setText(catArray.get(4).getCategory());
         double perc5 = ((catArray.get(4).getAmount()) / total_spent) * 100;
         tvC1perc5.setText(String.format("%.0f", perc5) + " %");
 //        cat 5
@@ -242,7 +248,8 @@ public class HomeFragment extends Fragment {
         pb5.setProgress((int)(perc5));        }
 
         if (6 <= catArray.size()) {
-        tvC1cat6.setText(catArray.get(5).getCategory());
+            v.findViewById(R.id.p5).setVisibility(View.VISIBLE);
+            tvC1cat6.setText(catArray.get(5).getCategory());
         double perc6 = ((catArray.get(5).getAmount()) / total_spent) * 100;
         tvC1perc6.setText(String.format("%.0f", perc6) + " %");
 //        cat 6
@@ -252,7 +259,8 @@ public class HomeFragment extends Fragment {
         pb6.setProgress((int)(perc6));        }
 
         if (7 <= catArray.size()) {
-        tvC1cat7.setText(catArray.get(6).getCategory());
+            v.findViewById(R.id.p6).setVisibility(View.VISIBLE);
+            tvC1cat7.setText(catArray.get(6).getCategory());
         double perc7 = ((catArray.get(6).getAmount()) / total_spent) * 100;
         tvC1perc7.setText(String.format("%.0f", perc7) + " %");
 //        cat 7
@@ -266,6 +274,8 @@ public class HomeFragment extends Fragment {
 
         return v;
     }
+
+
 
 
 
@@ -306,5 +316,12 @@ public class HomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+}
+
+class CustomComparator implements Comparator<CategoryInfo> {
+    @Override
+    public int compare(CategoryInfo o1, CategoryInfo o2) {
+        return o1.getAmount().compareTo(o2.getAmount());
     }
 }

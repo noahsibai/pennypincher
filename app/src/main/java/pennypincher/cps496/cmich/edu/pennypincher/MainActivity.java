@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab2);
-        fab2.setImageResource(R.drawable.ic_no_camera_24);
+        fab2.setImageResource(R.drawable.ic_no_camera_24_white);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity
         month = cal.get(Calendar.MONTH);
         day = cal.get(Calendar.DAY_OF_MONTH);
         db.GetAllRecords();
-        System.out.println(bdb.GetAllRecords());
         Toasty.Config.getInstance()
                 .setErrorColor(Color.RED)
                 .setInfoColor(Color.BLUE)
@@ -169,10 +168,8 @@ public class MainActivity extends AppCompatActivity
         if (pass) {
             double amount = Double.parseDouble(bud.amount.getText().toString());
             SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
-            System.out.println(dt.format(dtPicked));
             Budget newBud = new Budget(amount, dt.format(dtPicked));
             bdb.Insert(newBud);
-            System.out.println(bdb.GetAllRecords());
             datePicked = false;
             Toasty.success(this, "Budget Set.",
                     Toast.LENGTH_SHORT, true).show();

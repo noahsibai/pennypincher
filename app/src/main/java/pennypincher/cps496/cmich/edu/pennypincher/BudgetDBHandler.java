@@ -59,11 +59,9 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
         values.put(KEY_PURCHASE_DATE, newBudget.GetDate());
         db.insert(BUDGET_TABLE_DETAILS,null,values);
         db.close();
-        Log.d("Budget",newBudget.toString());
     }
 
     public Budget GetAllRecords(){
-        Log.d("All Records Start","Start");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS,null);
         String out = "Fails";
@@ -74,8 +72,6 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
             Budget budget = new Budget(cursor.getDouble(0), cursor.getString(1));
             cursor.close();
             db.close();
-            System.out.println(ToString(budget));
-            Log.d("All Records End","End");
             return budget;
         }
         return new Budget();
@@ -90,7 +86,6 @@ public class BudgetDBHandler extends SQLiteOpenHelper {
     public void RemoveAllRecords(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(BUDGET_TABLE_DETAILS,null,null);
-        Log.d("Deleted","Deleted Table");
     }
 
 

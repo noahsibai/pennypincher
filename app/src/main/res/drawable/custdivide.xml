@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:andorid="http://schemas.android.com/apk/res/android"
     andorid:shape="rectangle">
-    <size andorid:height="2dp"/>
+    <size andorid:height="6dp"/>
     <solid andorid:color="@color/colorPrimaryDark"/>
 </shape>

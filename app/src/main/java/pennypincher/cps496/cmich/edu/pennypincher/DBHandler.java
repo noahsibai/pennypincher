@@ -41,9 +41,9 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + BUDGET_TABLE_DETAILS + "("
-                + KEY_AMOUNT + " REAL NOT NULL,"
-                + KEY_CATEGORY + " TEXT NOT NULL,"
-                + KEY_IMG_PATH + " TEXT NOT NULL,"
+                + KEY_AMOUNT + " REAL,"
+                + KEY_CATEGORY + " TEXT,"
+                + KEY_IMG_PATH + " TEXT,"
                 + KEY_PURCHASE_DATE + " TEXT PRIMARY KEY)";
 
         db.execSQL(CREATE_TABLE);
@@ -137,13 +137,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(BUDGET_TABLE_DETAILS, null, null);
         Log.d("Deleted", "Deleted Table");
-    }
-
-    public void update(ContentValues cv, String TOP){
-        SQLiteDatabase db = this.getWritableDatabase();
-        System.out.println(cv.toString());
-        long check = db.update(BUDGET_TABLE_DETAILS,cv, KEY_PURCHASE_DATE +"="+TOP,null);
-//        System.out.print(check + "Check update");
     }
 
 

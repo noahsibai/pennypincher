@@ -48,15 +48,11 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
-            System.out.println(dt.format(startDate));
 
             if(cur.after(startDate) || cur.equals(startDate)){
                 bdb.RemoveAllRecords();
                 db.RemoveAllRecords();
             }
-        } else {
-            System.out.println("Winning");
         }
-
     }
 }
