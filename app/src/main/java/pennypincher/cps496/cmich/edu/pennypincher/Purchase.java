@@ -15,6 +15,11 @@ public class Purchase {
     private String Category;
     public byte[] ImagePath;
     private String TimeOPurch;
+    private int ID;
+
+    public void SetID(int id) { ID =id; }
+
+    public int GETID() {return ID;}
 
     public void setAmount(Double dub){
         Amount = dub;

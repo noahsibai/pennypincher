@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import pennypincher.cps496.cmich.edu.pennypincher.dummy.PurchaseContent;
 
@@ -42,9 +41,9 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + BUDGET_TABLE_DETAILS + "("
-                + KEY_AMOUNT + " REAL,"
-                + KEY_CATEGORY + " TEXT,"
-                + KEY_IMG_PATH + " TEXT,"
+                + KEY_AMOUNT + " REAL NOT NULL,"
+                + KEY_CATEGORY + " TEXT NOT NULL,"
+                + KEY_IMG_PATH + " TEXT NOT NULL,"
                 + KEY_PURCHASE_DATE + " TEXT PRIMARY KEY)";
 
         db.execSQL(CREATE_TABLE);
@@ -59,33 +58,34 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public void Insert(Purchase newPurch){
+    public void Insert(Purchase newPurch) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(KEY_AMOUNT, newPurch.GetAmount());
-        values.put(KEY_CATEGORY,newPurch.GetCategory());
+        values.put(KEY_CATEGORY, newPurch.GetCategory());
         values.put(KEY_IMG_PATH, newPurch.GetByteImage());
         values.put(KEY_PURCHASE_DATE, newPurch.GetTOP());
-        db.insert(BUDGET_TABLE_DETAILS,null,values);
+        db.insert(BUDGET_TABLE_DETAILS, null, values);
         db.close();
 
-        Log.d("Purch",newPurch.toString());
+        Log.d("Purch", newPurch.toString());
 
     }
+
     //Not sure if it is inserting data or not but causes error everytime I get to Categories
     //Log statement.
-    public void GetAllRecords(){
-        Log.d("All Records Start","Start");
+    public void GetAllRecords() {
+        Log.d("All Records Start", "Start");
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + BUDGET_TABLE_DETAILS, null);
         ArrayList<Purchase> Purchases = new ArrayList<Purchase>();
         Purchase SingPurch;
 
-        if(cursor.getCount() > 0){
-            for(int i = 0; i < cursor.getCount(); i ++){
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToNext();
                 SingPurch = new Purchase();
                 SingPurch.setAmount(cursor.getDouble(0));
@@ -97,26 +97,26 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         PurchaseContent.ITEMS.clear();
-        for (int i = 0; i < Purchases.size(); i++ ){
+        for (int i = 0; i < Purchases.size(); i++) {
             PurchaseContent.ITEMS.add(Purchases.get(i));
         }
 
         db.close();
 
-        Log.d("All Records End","End");
+        Log.d("All Records End", "End");
     }
 
-    public ArrayList<CategoryInfo> CategoryInfo(){
+    public ArrayList<CategoryInfo> CategoryInfo() {
         ArrayList<CategoryInfo> CatList = new ArrayList<CategoryInfo>();
         CategoryInfo SingInfo;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT Category, SUM(Amount) FROM " + BUDGET_TABLE_DETAILS
-                + " GROUP BY Category",null);
+                + " GROUP BY Category", null);
 
         CatList.clear();
-        if(cursor.getCount() > 0){
-            for(int i = 0; i < cursor.getCount(); i++){
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
                 SingInfo = new CategoryInfo();
                 cursor.moveToNext();
                 SingInfo.setAmount(cursor.getDouble(1));
@@ -125,18 +125,25 @@ public class DBHandler extends SQLiteOpenHelper {
             }
         }
 
-        for(int i = 0; i < CatList.size(); i++){
-            Log.d("catList" + i,"Category: " + CatList.get(i).getCategory() + " Amount: " + CatList.get(i).getAmount());
+        for (int i = 0; i < CatList.size(); i++) {
+            Log.d("catList" + i, "Category: " + CatList.get(i).getCategory() + " Amount: " + CatList.get(i).getAmount());
         }
 
 
         return CatList;
     }
 
-    public void RemoveAllRecords(){
+    public void RemoveAllRecords() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(BUDGET_TABLE_DETAILS,null,null);
-        Log.d("Deleted","Deleted Table");
+        db.delete(BUDGET_TABLE_DETAILS, null, null);
+        Log.d("Deleted", "Deleted Table");
+    }
+
+    public void update(ContentValues cv, String TOP){
+        SQLiteDatabase db = this.getWritableDatabase();
+        System.out.println(cv.toString());
+        long check = db.update(BUDGET_TABLE_DETAILS,cv, KEY_PURCHASE_DATE +"="+TOP,null);
+//        System.out.print(check + "Check update");
     }
 
 

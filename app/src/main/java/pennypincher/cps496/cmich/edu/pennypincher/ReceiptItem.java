@@ -25,6 +25,9 @@ public class ReceiptItem extends AppCompatActivity {
     ImageView imageView;
     Spinner cat;
     EditText amountView;
+    int id;
+
+    DBHandler db = new DBHandler(ReceiptItem.this, "we", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class ReceiptItem extends AppCompatActivity {
         cat = findViewById(R.id.category);
         amountView = findViewById(R.id.editAmount);
         amountView.setText(String.valueOf(amount));
+        id = extras.getInt("id");
         setImage(img);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.categories, R.layout.spinner_item);
@@ -65,13 +69,14 @@ public class ReceiptItem extends AppCompatActivity {
     }
 
     public void update(View v){
-//        ContentValues cv = new ContentValues();
-//        cv.put("Amount",amount);
-//        cv.put("Category",catString); //These Fields should be your String values of actual column names
-//        cv.put("Field2",getBytes(img));
-//        cv.put("ImagePath",TOP);
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.update("LOCAL_BUDGET", cv, "_id="+1, null);
+        ContentValues cv = new ContentValues();
+        cv.put("Amount",amount);
+        cv.put("Category",catString); //These Fields should be your String values of actual column names
+        cv.put("ImagePath",getBytes(img));
+        cv.put("PurchaseDate",TOP);
+        db.update(cv,TOP);
+        Intent in = new Intent(this,MainActivity.class);
+        startActivity(in);
 
     }
 

@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.System.out;
+
 /**
  * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
@@ -85,8 +87,9 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
                 extras.putDouble("amount", amount);
                 extras.putString("cat", cat);
                 extras.putString("TOP", TOP);
+                extras.putInt("id",position);
                 intent.putExtras(extras);
-                context.startActivity(intent);
+               // context.startActivity(intent);
 //                System.out.println(amount + " " + cat + " " + TOP + "before act");
             }
         });

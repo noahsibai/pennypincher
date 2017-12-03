@@ -46,7 +46,7 @@ public class Form extends AppCompatActivity {
         cat = findViewById(R.id.category);
         price = findViewById(R.id.price);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories, android.R.layout.simple_spinner_item);
+                R.array.categories, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cat.setAdapter(adapter);
         Toasty.Config.getInstance()
