@@ -7,6 +7,7 @@ package pennypincher.cps496.cmich.edu.pennypincher;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,21 +66,30 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         }
         SimpleDateFormat dt = (SimpleDateFormat) df;
         holder.TOP.setText("Date Logged: " + dt.format(tmp));
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (null != mListener) {
-//                    // Notify the active callbacks interface (the activity, if the
-//                    // fragment is attached to one) that an item has been selected.
-//                }
-//                //Onclick that enlarges the thumbnail to fullscreen activity
-//                Context context = v.getContext();
-//                Intent intent = new Intent(context,FullscreenActivity.class);
-//                Bitmap bit = mValues.get(position).GetImagePath();
-//                intent.putExtra("Image", bit);
-//                context.startActivity(intent);
-//            }
-//        });
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != mListener) {
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                }
+                //Onclick that enlarges the thumbnail to fullscreen activity
+                Context context = v.getContext();
+                Intent intent = new Intent(context,ReceiptItem.class);
+                Bundle extras = new Bundle();
+                Bitmap bit = mValues.get(position).GetImagePath();
+                double amount = mValues.get(position).GetAmount();
+                String cat = mValues.get(position).GetCategory();
+                String TOP = mValues.get(position).GetTOP();
+                intent.putExtra("Image", bit);
+                extras.putDouble("amount", amount);
+                extras.putString("cat", cat);
+                extras.putString("TOP", TOP);
+                intent.putExtras(extras);
+                context.startActivity(intent);
+//                System.out.println(amount + " " + cat + " " + TOP + "before act");
+            }
+        });
     }
 
     @Override
