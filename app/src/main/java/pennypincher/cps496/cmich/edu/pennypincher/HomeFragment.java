@@ -167,8 +167,6 @@ public class HomeFragment extends Fragment {
 
 
 
-
-
 //        categoryChart
 
 
@@ -201,7 +199,11 @@ public class HomeFragment extends Fragment {
         pb = v.findViewById(R.id.progressBar);
         Drawable d = new ProgressDrawable(0xff1ad1ff, 0xcc006680);
         pb.setProgressDrawable(d);
-        pb.setProgress((int)(perc1));        }
+        pb.setProgress((int)(perc1));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb, 0,(float)perc1 );
+        anim.setDuration(1000);
+        pb.startAnimation(anim);}
 
         if (2 <= catArray.size()) {
             v.findViewById(R.id.p1).setVisibility(View.VISIBLE);
@@ -212,7 +214,11 @@ public class HomeFragment extends Fragment {
         pb2 = v.findViewById(R.id.progressBar2);
         Drawable d2 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
         pb2.setProgressDrawable(d2);
-        pb2.setProgress((int)(perc2));      }
+        pb2.setProgress((int)(perc2));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb2, 0,(float)perc2 );
+        anim.setDuration(1000);
+        pb2.startAnimation(anim);}
 
         if (3 <= catArray.size()) {
             v.findViewById(R.id.p2).setVisibility(View.VISIBLE);
@@ -223,7 +229,11 @@ public class HomeFragment extends Fragment {
         pb3 = v.findViewById(R.id.progressBar3);
         Drawable d3 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
         pb3.setProgressDrawable(d3);
-        pb3.setProgress((int)(perc3));        }
+        pb3.setProgress((int)(perc3));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb3, 0,(float)perc3 );
+        anim.setDuration(1000);
+        pb3.startAnimation(anim);}
 
         if (4 <= catArray.size()) {
             v.findViewById(R.id.p3).setVisibility(View.VISIBLE);
@@ -234,7 +244,11 @@ public class HomeFragment extends Fragment {
         pb4 = v.findViewById(R.id.progressBar4);
         Drawable d4 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
         pb4.setProgressDrawable(d4);
-        pb4.setProgress((int)(perc4));       }
+        pb4.setProgress((int)(perc4));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb4, 0,(float)perc4 );
+        anim.setDuration(1000);
+        pb4.startAnimation(anim);}
 
         if (5 <= catArray.size()) {
             v.findViewById(R.id.p4).setVisibility(View.VISIBLE);
@@ -245,7 +259,11 @@ public class HomeFragment extends Fragment {
         pb5 = v.findViewById(R.id.progressBar5);
         Drawable d5 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
         pb5.setProgressDrawable(d5);
-        pb5.setProgress((int)(perc5));        }
+        pb5.setProgress((int)(perc5));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb5, 0,(float)perc5 );
+        anim.setDuration(1000);
+        pb5.startAnimation(anim);}
 
         if (6 <= catArray.size()) {
             v.findViewById(R.id.p5).setVisibility(View.VISIBLE);
@@ -256,7 +274,11 @@ public class HomeFragment extends Fragment {
         pb6 = v.findViewById(R.id.progressBar6);
         Drawable d6 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
         pb6.setProgressDrawable(d6);
-        pb6.setProgress((int)(perc6));        }
+        pb6.setProgress((int)(perc6));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb6, 0,(float)perc6 );
+        anim.setDuration(1000);
+        pb6.startAnimation(anim);}
 
         if (7 <= catArray.size()) {
             v.findViewById(R.id.p6).setVisibility(View.VISIBLE);
@@ -267,7 +289,11 @@ public class HomeFragment extends Fragment {
         pb7 = v.findViewById(R.id.progressBar7);
         Drawable d7 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
         pb7.setProgressDrawable(d7);
-        pb7.setProgress((int)(perc7));        }
+        pb7.setProgress((int)(perc7));
+
+        ProgressBarAnimation anim = new ProgressBarAnimation(pb7, 0,((float)perc7));
+        anim.setDuration(1000);
+        pb7.startAnimation(anim);}
 
 
 

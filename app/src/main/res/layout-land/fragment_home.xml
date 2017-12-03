@@ -45,152 +45,189 @@
                     card_view:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/p0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="invisible">
 
-                        <TextView
-                            android:id="@+id/tv1"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="monospace"
-                            android:text="Category"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv2"
+                            <TextView
+                                android:id="@+id/tv1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="monospace"
+                                android:text="Category"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tv2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100"
+                                android:textAlignment="gravity"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="25sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="100"
-                            android:textAlignment="gravity"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="25sp"
-                            android:visibility="visible" />
+                            android:layout_weight="1" />
 
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:id="@+id/p1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="invisible">
 
-                        <TextView
-                            android:id="@+id/tv3"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="monospace"
-                            android:text="Category"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv4"
+                            <TextView
+                                android:id="@+id/tv3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="monospace"
+                                android:text="Category"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tv4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100"
+                                android:textAlignment="gravity"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="25sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar2"
+                            style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="100"
-                            android:textAlignment="gravity"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="25sp"
-                            android:visibility="visible" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar2"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:id="@+id/p2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="invisible">
 
-                        <TextView
-                            android:id="@+id/tv5"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="monospace"
-                            android:text="Category"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv6"
+                            <TextView
+                                android:id="@+id/tv5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="monospace"
+                                android:text="Category"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tv6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100"
+                                android:textAlignment="gravity"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="25sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar3"
+                            style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="100"
-                            android:textAlignment="gravity"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="25sp"
-                            android:visibility="visible" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar3"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:id="@+id/p3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:visibility="invisible">
 
-                        <TextView
-                            android:id="@+id/tv7"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="monospace"
-                            android:text="Category"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:visibility="visible" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv8"
+                            <TextView
+                                android:id="@+id/tv7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="monospace"
+                                android:text="Category"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:id="@+id/tv8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="100"
+                                android:textAlignment="gravity"
+                                android:textColor="@android:color/background_light"
+                                android:textSize="25sp"
+                                android:visibility="visible" />
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar4"
+                            style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="100"
-                            android:textAlignment="gravity"
-                            android:textColor="@android:color/background_light"
-                            android:textSize="25sp"
-                            android:visibility="visible" />
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
-
-                    <ProgressBar
-                        android:id="@+id/progressBar4"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
 
                 </LinearLayout>
@@ -204,21 +241,21 @@
                 android:orientation="vertical"
                 android:weightSum="100">
 
-                <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <android.support.v7.widget.CardView
                     android:id="@+id/card1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
-                    app:cardCornerRadius="30dp"
-                    card_view:cardBackgroundColor="@android:color/transparent">
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardCornerRadius="30dp">
 
 
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:card_view="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/progress_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        app:cardCornerRadius="30dp"
+                        card_view:cardCornerRadius="30dp"
                         card_view:rcBackgroundColor="@color/cardDark"
                         card_view:rcBackgroundPadding="10dp"
                         card_view:rcRadius="20dp"
@@ -239,27 +276,172 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/misc1"
+                    android:id="@+id/graph2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    card_view:cardBackgroundColor="@color/chcard"
-                    card_view:cardCornerRadius="30dp">
+                    android:layout_margin="5dp"
+                    card_view:cardBackgroundColor="@color/cardDark"
+                    card_view:cardCornerRadius="10dp">
 
 
-                    <TableLayout
-                        android:id="@+id/Table"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/muted"
+                        android:orientation="vertical"
                         android:padding="20dp"
-                        android:stretchColumns="0,1">
+                        card_view:cardCornerRadius="30dp"
+                        card_view:layout_constraintBottom_toBottomOf="parent"
+                        card_view:layout_constraintEnd_toEndOf="parent"
+                        card_view:layout_constraintStart_toStartOf="parent"
+                        card_view:layout_constraintTop_toTopOf="parent">
 
-                    </TableLayout>
+                        <LinearLayout
+                            android:id="@+id/p4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv9"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="monospace"
+                                    android:text="Category"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:id="@+id/tv10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:text="100"
+                                    android:textAlignment="gravity"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="25sp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar5"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/p5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv11"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="monospace"
+                                    android:text="Category"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:id="@+id/tv12"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:text="100"
+                                    android:textAlignment="gravity"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="25sp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar6"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/p6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="invisible">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv13"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="monospace"
+                                    android:text="Category"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:id="@+id/tv14"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:text="100"
+                                    android:textAlignment="gravity"
+                                    android:textColor="@android:color/background_light"
+                                    android:textSize="25sp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar7"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
 
 
+                    </LinearLayout>
                 </android.support.v7.widget.CardView>
+
             </LinearLayout>
 
         </LinearLayout>
