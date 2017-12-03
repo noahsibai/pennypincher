@@ -78,7 +78,24 @@ public class HomeFragment extends Fragment {
     ProgressBar pb2;
     ProgressBar pb3;
     ProgressBar pb4;
+    ProgressBar pb5;
+    ProgressBar pb6;
+    ProgressBar pb7;
 
+    TextView tvC1cat;
+    TextView tvC1perc;
+    TextView tvC1cat2;
+    TextView tvC1perc2;
+    TextView tvC1cat3;
+    TextView tvC1perc3;
+    TextView tvC1cat4;
+    TextView tvC1perc4;
+    TextView tvC1cat5;
+    TextView tvC1perc5;
+    TextView tvC1cat6;
+    TextView tvC1perc6;
+    TextView tvC1cat7;
+    TextView tvC1perc7;
 
 
     @Override
@@ -100,29 +117,19 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-
 //  table
-        Context mContext = v.getContext();
-        tab = v.findViewById(R.id.Table);
         catArray = db.CategoryInfo();
         StringBuilder Sbuilder = new StringBuilder();
+
+
         for(int i = 0; i < catArray.size();i++){
             Log.d("catArray" + i,"Category: " + catArray.get(i).getCategory() + " Amount: " + catArray.get(i).getAmount());
             Sbuilder.append("Category: " + catArray.get(i).getCategory()).append(" Amount: " + catArray.get(i).getAmount());
         }
 
+
         for(int i = 0; i < catArray.size(); i++){
             total_spent = total_spent + (catArray.get(i).getAmount());
-            TableRow tr = new TableRow(mContext);
-            TextView tv = new TextView(mContext);
-            TextView tv2 = new TextView(mContext);
-            tv.setText(catArray.get(i).getCategory());
-            tv2.setText(String.format("%.2f",catArray.get(i).getAmount()));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_PT,15);
-            tv2.setTextSize(TypedValue.COMPLEX_UNIT_PT, 15);
-            tr.addView(tv);
-            tr.addView(tv2);
-            tab.addView(tr);
         }
 
 //  PrgBar
@@ -141,50 +148,108 @@ public class HomeFragment extends Fragment {
         progress1.setProgress(buf);
         progress1.setSecondaryProgress((float)(total_spent));
 
+
+
 //        categoryChart
 
-        loadCats(v);
+
+//        TVs for info
+        tvC1cat = v.findViewById(R.id.tv1);
+        tvC1perc = v.findViewById(R.id.tv2);
+        tvC1cat2 = v.findViewById(R.id.tv3);
+        tvC1perc2 = v.findViewById(R.id.tv4);
+        tvC1cat3 = v.findViewById(R.id.tv5);
+        tvC1perc3 = v.findViewById(R.id.tv6);
+        tvC1cat4 = v.findViewById(R.id.tv7);
+        tvC1perc4 = v.findViewById(R.id.tv8);
+        tvC1cat5 = v.findViewById(R.id.tv9);
+        tvC1perc5 = v.findViewById(R.id.tv10);
+        tvC1cat6 = v.findViewById(R.id.tv11);
+        tvC1perc6 = v.findViewById(R.id.tv12);
+        tvC1cat7 = v.findViewById(R.id.tv13);
+        tvC1perc7 = v.findViewById(R.id.tv14);
+
+
+
+
+        if (1 <= catArray.size()) {
+        tvC1cat.setText(catArray.get(0).getCategory());
+        double perc1 = ((catArray.get(0).getAmount()) / total_spent) * 100;
+        Log.d("key ",String.format("%.0f", perc1));
+        tvC1perc.setText(String.format("%.0f", perc1) + " %");
+//        cat 1
+        pb = v.findViewById(R.id.progressBar);
+        Drawable d = new ProgressDrawable(0xff1ad1ff, 0xcc006680);
+        pb.setProgressDrawable(d);
+        pb.setProgress((int)(perc1));        }
+
+        if (2 <= catArray.size()) {
+        tvC1cat2.setText(catArray.get(1).getCategory());
+        double perc2 = ((catArray.get(1).getAmount()) / total_spent) * 100;
+        tvC1perc2.setText(String.format("%.0f", perc2) + " %");
+//        cat 2
+        pb2 = v.findViewById(R.id.progressBar2);
+        Drawable d2 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
+        pb2.setProgressDrawable(d2);
+        pb2.setProgress((int)(perc2));      }
+
+        if (3 <= catArray.size()) {
+        tvC1cat3.setText(catArray.get(2).getCategory());
+        double perc3 = ((catArray.get(2).getAmount()) / total_spent) * 100;
+        tvC1perc3.setText(String.format("%.0f", perc3) + " %");
+//        cat 3
+        pb3 = v.findViewById(R.id.progressBar3);
+        Drawable d3 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
+        pb3.setProgressDrawable(d3);
+        pb3.setProgress((int)(perc3));        }
+
+        if (4 <= catArray.size()) {
+        tvC1cat4.setText(catArray.get(3).getCategory());
+        double perc4 = ((catArray.get(3).getAmount()) / total_spent) * 100;
+        tvC1perc4.setText(String.format("%.0f", perc4) + " %");
+//        cat 4
+        pb4 = v.findViewById(R.id.progressBar4);
+        Drawable d4 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
+        pb4.setProgressDrawable(d4);
+        pb4.setProgress((int)(perc4));       }
+
+        if (5 <= catArray.size()) {
+        tvC1cat5.setText(catArray.get(4).getCategory());
+        double perc5 = ((catArray.get(4).getAmount()) / total_spent) * 100;
+        tvC1perc5.setText(String.format("%.0f", perc5) + " %");
+//        cat 5
+        pb5 = v.findViewById(R.id.progressBar5);
+        Drawable d5 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
+        pb5.setProgressDrawable(d5);
+        pb5.setProgress((int)(perc5));        }
+
+        if (6 <= catArray.size()) {
+        tvC1cat6.setText(catArray.get(5).getCategory());
+        double perc6 = ((catArray.get(5).getAmount()) / total_spent) * 100;
+        tvC1perc6.setText(String.format("%.0f", perc6) + " %");
+//        cat 6
+        pb6 = v.findViewById(R.id.progressBar6);
+        Drawable d6 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
+        pb6.setProgressDrawable(d6);
+        pb6.setProgress((int)(perc6));        }
+
+        if (7 <= catArray.size()) {
+        tvC1cat7.setText(catArray.get(6).getCategory());
+        double perc7 = ((catArray.get(6).getAmount()) / total_spent) * 100;
+        tvC1perc7.setText(String.format("%.0f", perc7) + " %");
+//        cat 7
+        pb7 = v.findViewById(R.id.progressBar7);
+        Drawable d7 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
+        pb7.setProgressDrawable(d7);
+        pb7.setProgress((int)(perc7));        }
+
+
 
 
         return v;
     }
 
 
-    public void loadCats(View v) {
-
-//        load in stats
-        bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
-
-        Budget budget = bdb.GetAllRecords();
-
-//        TVs for info
-        TextView tvC1cat = v.findViewById(R.id.tv1);
-        tvC1cat.setText("text?");
-        TextView tvC1perc = v.findViewById(R.id.tv2);
-        TextView tvC2cat = v.findViewById(R.id.tv3);
-        TextView tvC2perc = v.findViewById(R.id.tv4);
-
-//        cat 1
-        pb = v.findViewById(R.id.progressBar);
-        Drawable d = new ProgressDrawable(0xff1ad1ff, 0xcc006680);
-        pb.setProgressDrawable(d);
-        pb.setProgress(20);
-//        cat 2
-        pb2 = v.findViewById(R.id.progressBar2);
-        Drawable d2 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
-        pb2.setProgressDrawable(d2);
-        pb2.setProgress(60);
-//        cat 3
-        pb3 = v.findViewById(R.id.progressBar3);
-        Drawable d3 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
-        pb3.setProgressDrawable(d3);
-        pb3.setProgress(12);
-//        cat 4
-        pb4 = v.findViewById(R.id.progressBar4);
-        Drawable d4 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
-        pb4.setProgressDrawable(d4);
-        pb4.setProgress(88);
-    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
