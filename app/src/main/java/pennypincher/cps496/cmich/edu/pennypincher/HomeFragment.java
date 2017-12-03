@@ -1,6 +1,7 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -72,6 +74,12 @@ public class HomeFragment extends Fragment {
     BudgetDBHandler bdb;
     TextView totperc;
 
+    ProgressBar pb;
+    ProgressBar pb2;
+    ProgressBar pb3;
+    ProgressBar pb4;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,11 +125,12 @@ public class HomeFragment extends Fragment {
             tab.addView(tr);
         }
 
-        //  PrgBar
+//  PrgBar
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
 
         Budget t = bdb.GetAllRecords();
         progress1 = v.findViewById(R.id.progress_1);
+
 //        set the percentage
         double perc = (total_spent / ((float)(t.GetAmount()))) * 100;
         totperc = v.findViewById(R.id.PERCENT);
@@ -132,9 +141,49 @@ public class HomeFragment extends Fragment {
         progress1.setProgress(buf);
         progress1.setSecondaryProgress((float)(total_spent));
 
+//        categoryChart
+
+        loadCats(v);
 
 
         return v;
+    }
+
+
+    public void loadCats(View v) {
+
+//        load in stats
+        bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
+
+        Budget budget = bdb.GetAllRecords();
+
+//        TVs for info
+        TextView tvC1cat = v.findViewById(R.id.tv1);
+        tvC1cat.setText("text?");
+        TextView tvC1perc = v.findViewById(R.id.tv2);
+        TextView tvC2cat = v.findViewById(R.id.tv3);
+        TextView tvC2perc = v.findViewById(R.id.tv4);
+
+//        cat 1
+        pb = v.findViewById(R.id.progressBar);
+        Drawable d = new ProgressDrawable(0xff1ad1ff, 0xcc006680);
+        pb.setProgressDrawable(d);
+        pb.setProgress(20);
+//        cat 2
+        pb2 = v.findViewById(R.id.progressBar2);
+        Drawable d2 = new ProgressDrawable(0xf2ff8000, 0xccb50800);
+        pb2.setProgressDrawable(d2);
+        pb2.setProgress(60);
+//        cat 3
+        pb3 = v.findViewById(R.id.progressBar3);
+        Drawable d3 = new ProgressDrawable(0xdde81aff, 0xcc8a0099);
+        pb3.setProgressDrawable(d3);
+        pb3.setProgress(12);
+//        cat 4
+        pb4 = v.findViewById(R.id.progressBar4);
+        Drawable d4 = new ProgressDrawable(0xddff4d4f, 0xcc800002);
+        pb4.setProgressDrawable(d4);
+        pb4.setProgress(88);
     }
 
 
