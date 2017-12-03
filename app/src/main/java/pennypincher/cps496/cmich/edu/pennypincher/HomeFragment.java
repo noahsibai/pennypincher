@@ -1,6 +1,7 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -137,16 +138,33 @@ public class HomeFragment extends Fragment {
 
         Budget t = bdb.GetAllRecords();
         progress1 = v.findViewById(R.id.progress_1);
-
-//        set the percentage
+        //        set the percentage
         double perc = (total_spent / ((float)(t.GetAmount()))) * 100;
         totperc = v.findViewById(R.id.PERCENT);
-        totperc.setText(String.format("%.0f", perc) + " %");
+        if(t.GetAmount() > 0){
+            totperc.setText(String.format("%.0f", perc) + " %");
+        } else{
+            totperc.setText("Please Set a Budget");
+        }
 
         progress1.setMax((float)(t.GetAmount()));
         int buf = (int)((float)(total_spent) * .95);
         progress1.setProgress(buf);
         progress1.setSecondaryProgress((float)(total_spent));
+
+
+        if (perc >= 100){
+            progress1.setProgressColor(Color.RED);
+            progress1.setSecondaryProgressColor(Color.RED);
+        } else {
+            progress1.setProgressColor(Color.parseColor("#26cc42"));
+            progress1.setSecondaryProgressColor(Color.parseColor("#92fcca"));
+        }
+
+
+
+
+
 
 
 

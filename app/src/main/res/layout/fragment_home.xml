@@ -37,12 +37,15 @@
                     android:layout_gravity="center_vertical"
                     app:rcBackgroundColor="@color/cardDark"
                     app:rcBackgroundPadding="10dp"
-                    app:rcProgressColor="@color/colorPrimary"
                     app:rcRadius="20dp"
                     app:rcReverse="false"
-                    app:rcSecondaryProgressColor="@color/splashBackground">
+                    >
 
                 </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+                <!--app:rcProgressColor="@color/colorPrimary"-->
+                <!--app:rcSecondaryProgressColor="@color/splashBackground"-->
+
 
                 <TextView
                     android:id="@+id/PERCENT"

@@ -1,6 +1,8 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import java.io.ByteArrayOutputStream;
 
 import es.dmoral.toasty.Toasty;
 
@@ -61,10 +65,24 @@ public class ReceiptItem extends AppCompatActivity {
     }
 
     public void update(View v){
+//        ContentValues cv = new ContentValues();
+//        cv.put("Amount",amount);
+//        cv.put("Category",catString); //These Fields should be your String values of actual column names
+//        cv.put("Field2",getBytes(img));
+//        cv.put("ImagePath",TOP);
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        db.update("LOCAL_BUDGET", cv, "_id="+1, null);
 
+    }
+
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
     public void delete(View v){
 
     }
+
 }

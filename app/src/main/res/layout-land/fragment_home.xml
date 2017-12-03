@@ -28,8 +28,7 @@
                 card_view:cardCornerRadius="10dp">
 
 
-                <LinearLayout
-                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="8dp"
@@ -201,33 +200,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:orientation="vertical"
                 android:layout_weight="50"
+                android:orientation="vertical"
                 android:weightSum="100">
 
-                <android.support.v7.widget.CardView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:cardCornerRadius="30dp"
+                <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/card1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_margin="5dp"
+                    app:cardCornerRadius="30dp"
                     card_view:cardBackgroundColor="@android:color/transparent">
 
 
-                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        app:cardCornerRadius="30dp"
+                    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/progress_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
+                        app:cardCornerRadius="30dp"
                         card_view:rcBackgroundColor="@color/cardDark"
                         card_view:rcBackgroundPadding="10dp"
-                        card_view:rcProgressColor="@color/colorPrimary"
                         card_view:rcRadius="20dp"
-                        card_view:rcReverse="false"
-                        card_view:rcSecondaryProgressColor="@color/splashBackground">
+                        card_view:rcReverse="false">
 
                     </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
 
