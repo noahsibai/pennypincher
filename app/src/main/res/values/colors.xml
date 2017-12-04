@@ -7,8 +7,8 @@
     <color name="splashBackground">#92fcca</color>
     <color name="bgcolor">#beadad</color>
     <color name="card">#e9e9e9</color>
-    <color name="cardDark">#81acacac</color>
+    <color name="cardDark">#73a49d</color>
     <color name="chcard">#9c9c9c</color>
-    <color name="dark_slate_gray">#4f5353</color>
+    <color name="dark_slate_gray">#00695C</color>
     <color name="muted">#bf333232</color>
 </resources>

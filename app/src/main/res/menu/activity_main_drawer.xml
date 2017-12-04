@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
-            android:title="Home" />
+            android:title="Dashboard" />
         <item
             android:id="@+id/nav_receipts"
             android:icon="@drawable/ic_receipt_black_24dp"
-            android:title="Receipt Logs" />
+            android:title="Receipt Log" />
         <item
             android:id="@+id/nav_set_Budget"
             android:icon="@drawable/money_icon"
-            android:title="Set Budget" />
+            android:title="Budget" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/settings"
