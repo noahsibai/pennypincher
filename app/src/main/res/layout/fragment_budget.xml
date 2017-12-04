@@ -8,7 +8,8 @@
 
     <!--This will display when there is no budget set or if it is set to zero-->
 
-    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardDark"
@@ -147,8 +148,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="138dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="101dp"
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
@@ -163,8 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/textView3"
-                android:layout_marginTop="57dp"
+                android:layout_centerVertical="true"
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
