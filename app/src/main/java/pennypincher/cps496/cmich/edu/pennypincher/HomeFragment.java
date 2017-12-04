@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment {
         double perc = (total_spent / ((float)(t.GetAmount()))) * 100;
         totperc = v.findViewById(R.id.PERCENT);
         if(t.GetAmount() > 0){
-            totperc.setText(String.format("%.0f", perc) + " %");
+            totperc.setText(String.format("%.0f", perc) + " % of Budeget Spent");
         } else{
             totperc.setText("Please Set a Budget");
         }

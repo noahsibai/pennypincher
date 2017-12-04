@@ -81,7 +81,7 @@ public class BudgetFragment extends Fragment {
             v.findViewById(R.id.setBud).setVisibility(v.INVISIBLE);
             v.findViewById(R.id.showBud).setVisibility(v.VISIBLE);
         }
-        curBud.setText("Current Budget: " + bud.GetAmount());
+        curBud.setText("Current Budget: " + String.format("$%.2f", bud.GetAmount()));
         curBudDate.setText("Budget End Date:\n" + bud.GetDate());
         return v;
     }
