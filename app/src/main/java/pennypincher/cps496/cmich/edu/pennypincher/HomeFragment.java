@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment {
         progress1.setMax((float)(t.GetAmount()));
         int buf = (int)((float)(total_spent) * .95);
         progress1.setProgress(buf);
-        progress1.setSecondaryProgress((float)(total_spent));
+//        progress1.setSecondaryProgress((float)(total_spent));
 
 
         if (perc >= 100){
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment {
             progress1.setSecondaryProgressColor(Color.RED);
         } else {
             progress1.setProgressColor(Color.parseColor("#26cc42"));
-            progress1.setSecondaryProgressColor(Color.parseColor("#92fcca"));
+//            progress1.setSecondaryProgressColor(Color.parseColor("#183e18"));
         }
 
 

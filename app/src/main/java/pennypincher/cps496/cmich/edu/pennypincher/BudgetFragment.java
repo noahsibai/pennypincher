@@ -25,6 +25,7 @@ public class BudgetFragment extends Fragment {
     EditText amount;
     View v;
     TextView curBud;
+    TextView curBudDate;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,6 +72,7 @@ public class BudgetFragment extends Fragment {
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
         amount = v.findViewById(R.id.budAmount);
         curBud = v.findViewById(R.id.textView3);
+        curBudDate = v.findViewById(R.id.textView4);
         Budget bud = bdb.GetAllRecords();
         if (bud.GetAmount() == 0){
             v.findViewById(R.id.setBud).setVisibility(v.VISIBLE);
@@ -80,6 +82,7 @@ public class BudgetFragment extends Fragment {
             v.findViewById(R.id.showBud).setVisibility(v.VISIBLE);
         }
         curBud.setText("Current Budget: " + bud.GetAmount());
+        curBudDate.setText("Budget End Date:\n" + bud.GetDate());
         return v;
     }
 
