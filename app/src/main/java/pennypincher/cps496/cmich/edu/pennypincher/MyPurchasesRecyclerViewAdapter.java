@@ -58,7 +58,7 @@ public class MyPurchasesRecyclerViewAdapter extends RecyclerView.Adapter<MyPurch
         holder.ImPath.getLayoutParams().width = 800;
         holder.ImPath.requestLayout();
         holder.ImPath.setImageBitmap(mValues.get(position).GetImagePath());
-        DateFormat df = new SimpleDateFormat("MM-dd-yy");
+        DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
         String check = mValues.get(position).GetTOP();
         Date tmp = new Date();
         try {

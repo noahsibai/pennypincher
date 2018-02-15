@@ -1,7 +1,10 @@
 package pennypincher.cps496.cmich.edu.pennypincher;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +24,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +32,19 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
+
+import static android.app.PendingIntent.getActivity;
 
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity
@@ -43,21 +53,40 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
     DBHandler db = new DBHandler(MainActivity.this, "we", null, 1);
     BudgetDBHandler bdb = new BudgetDBHandler(MainActivity.this, "we", null, 1);
+    BudgetHistoryDBHandler bhdb = new BudgetHistoryDBHandler(MainActivity.this,"we",null,1);
     NavigationView navigationView;
     HomeFragment home;
     PurchasesFragment purch;
     BudgetFragment bud;
     SettingsFragment set;
     Date dtPicked;
+    String LatestBudID;
     int year;
     int month;
     int day;
     boolean datePicked = false;
     static final int DIALOG_ID = 0;
+    Context context;
+    int time = 1;
+    ArrayList<HistoryResult> BudgHist;
+    AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = MainActivity.this;
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        /*Intent intent = new Intent(context, ServReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,0);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(), (1000 * 60) * time ,pendingIntent);*/
+        BudgHist = bhdb.GetAllRecords();
+        for(int i = 0; i < BudgHist.size();i++){
+            HistoryResult bh = BudgHist.get(i);
+            Log.d("BudgeHist " + i, "Start: " + bh.getStartDate() + " End: " + bh.getEndDate()
+            + " Status: " + bh.getStatus() + " OverUnder: " + bh.getOverUnder());
+        }
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -131,19 +160,21 @@ public class MainActivity extends AppCompatActivity
             new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                    year = year;
-                    month = month + 1;
-                    day = day;
-                    DateFormat df = new SimpleDateFormat("MM-dd-yy");
-                    String check = month + "-" + day + "-" + year;
+                    int cyear = year;
+                    int cmonth = month + 1;
+                    int cday = day;
+                    DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+                    String check = cmonth + "-" + cday + "-" + cyear;
+                    Log.d("CheckString",check);
                     try {
                         dtPicked = df.parse(check);
+                        Log.d("Check",df.format(dtPicked));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     datePicked = true;
                     TextView dateSelected = bud.getActivity().findViewById(R.id.dateSelected);
-                    dateSelected.setText(check);
+                    dateSelected.setText(df.format(dtPicked));
                 }
             };
 
@@ -167,10 +198,39 @@ public class MainActivity extends AppCompatActivity
         if (count ==0 ) pass = true;
         if (pass) {
             double amount = Double.parseDouble(bud.amount.getText().toString());
-            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy");
+            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy h:mm:ss a");
+            Log.d("DateTime",new DateTime().toString("MM-dd-yyyy h:mm:ss a"));
             Budget newBud = new Budget(amount, dt.format(dtPicked));
+            Date rightnow;
+            try{
+                rightnow = df.parse(new DateTime().toString("MM-dd-yyyy h:mm:ss a"));
+            }catch(Exception e){
+                rightnow = new Date();
+            }
+            BudgetHistory newrecord;
+
+            newrecord = new BudgetHistory();
+            newrecord.setEndDate(dtPicked);
+            newrecord.setStartDate(rightnow);
+            newrecord.setStatus("In Progress");
+            LatestBudID = bhdb.Insert(newrecord);
+            Log.d("DataCheck",df.format(dtPicked));
             bdb.Insert(newBud);
             datePicked = false;
+
+            Intent intent = new Intent(context, ServReceiver.class);
+            Log.d("BH_LKEY",LatestBudID);
+            intent.putExtra("BH_LKEY",LatestBudID);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,0,intent,0);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(), (1000 * 60) * time ,pendingIntent);
+
+            for(int i = 0; i < BudgHist.size();i++){
+                HistoryResult bh = BudgHist.get(i);
+                Log.d("BudgeHist " + i, "Start: " + bh.getStartDate() + " End: " + bh.getEndDate()
+                        + " Status: " + bh.getStatus() + " OverUnder: " + bh.getOverUnder());
+            }
+
             Toasty.success(this, "Budget Set.",
                     Toast.LENGTH_SHORT, true).show();
             bud = new BudgetFragment();
@@ -187,6 +247,15 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
+                        HistoryResult result = bhdb.MostRecenRecord();
+                        bhdb.UpdateStatus("Budget Deleted",result.getStartDate());
+                        double total = 0;
+                        ArrayList<CategoryInfo> catArray = db.CategoryInfo();
+                        for(int i = 0; i < catArray.size();i++){
+                            total = total + catArray.get(i).getAmount();
+                        }
+                        bhdb.UpdateOverUnder(total,result.getStartDate());
+                        Log.d("Updated",result.toString());
                         bdb.RemoveAllRecords();
                         bud = new BudgetFragment();
                         FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
@@ -210,14 +279,15 @@ public class MainActivity extends AppCompatActivity
     public void ClearDB(View v) {
         new AlertDialog.Builder(this)
                 .setTitle("Warning!")
-                .setMessage("Do you really want to to delete the entire of the Database" +
-                        " If you do you will lose all of your receipts and budget as well.")
+                .setMessage("Do you really want to to delete the entire Database" +
+                        " If you do you will lose all of your receipts and budget information")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         bdb.RemoveAllRecords();
                         db.RemoveAllRecords();
+                        bhdb.RemoveAllRecords();
                         home = new HomeFragment();
                         FragmentTransaction Frag = getSupportFragmentManager().beginTransaction();
                         Frag.replace(R.id.content, home).commit();

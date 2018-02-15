@@ -4,11 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -70,6 +74,8 @@ public class BudgetFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_budget, container, false);
         bdb = new BudgetDBHandler(v.getContext(), "we", null, 1);
+        SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd yyyy");
         amount = v.findViewById(R.id.budAmount);
         curBud = v.findViewById(R.id.textView3);
         curBudDate = v.findViewById(R.id.textView4);
@@ -78,11 +84,19 @@ public class BudgetFragment extends Fragment {
             v.findViewById(R.id.setBud).setVisibility(v.VISIBLE);
             v.findViewById(R.id.showBud).setVisibility(v.INVISIBLE);
         } else {
+            Log.d("DDate1",bud.GetDate());
             v.findViewById(R.id.setBud).setVisibility(v.INVISIBLE);
             v.findViewById(R.id.showBud).setVisibility(v.VISIBLE);
         }
         curBud.setText("Current Budget: " + String.format("$%.2f", bud.GetAmount()));
-        curBudDate.setText("Budget End Date:\n" + bud.GetDate());
+        try{
+            Date nDate = df.parse(bud.GetDate());
+            Log.d("BudDate", dt.format(nDate));
+            curBudDate.setText("Budget End Date:\n\n " + dt.format(nDate));
+        }catch(Exception e){
+            Log.d("curBudDate",e.toString());
+        }
+        bdb.close();
         return v;
     }
 

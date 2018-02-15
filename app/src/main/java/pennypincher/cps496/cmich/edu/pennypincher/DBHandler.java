@@ -72,11 +72,9 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
 
         Log.d("Purch", newPurch.toString());
-
     }
 
-    //Not sure if it is inserting data or not but causes error everytime I get to Categories
-    //Log statement.
+
     public void GetAllRecords() {
         Log.d("All Records Start", "Start");
         SQLiteDatabase db = this.getReadableDatabase();
@@ -94,14 +92,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 SingPurch.setTimeOPurch(cursor.getString(3));
                 Purchases.add(SingPurch);
             }
+            db.close();
         }
         cursor.close();
+        db.close();
         PurchaseContent.ITEMS.clear();
         for (int i = 0; i < Purchases.size(); i++) {
             PurchaseContent.ITEMS.add(Purchases.get(i));
         }
-
-        db.close();
 
         Log.d("All Records End", "End");
     }
@@ -124,7 +122,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 CatList.add(SingInfo);
             }
         }
-
+        db.close();
         for (int i = 0; i < CatList.size(); i++) {
             Log.d("catList" + i, "Category: " + CatList.get(i).getCategory() + " Amount: " + CatList.get(i).getAmount());
         }
@@ -137,6 +135,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(BUDGET_TABLE_DETAILS, null, null);
         Log.d("Deleted", "Deleted Table");
+        db.close();
     }
 
 

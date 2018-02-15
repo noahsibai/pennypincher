@@ -31,6 +31,10 @@ public class PurchaseContent {
         ITEM_MAP.put(item.GetTOP(), item);
     }
 
+    private static void clear(){
+        ITEMS.clear();
+    }
+
     private static PurchaseItem createPurchaseItem(PurchaseItem PItem) {
         return PItem;
     }

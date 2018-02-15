@@ -14,9 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +24,13 @@
             </intent-filter>
             <!-- This calls the Splash Screen Activity to load first -->
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Form" />
+
+        <receiver
+            android:name=".ServReceiver"
+            android:exported="false" />
+
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>

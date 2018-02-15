@@ -79,9 +79,9 @@ public class Form extends AppCompatActivity {
             newPurch.setAmount(Amount);
             newPurch.setCategory(cat.getSelectedItem().toString());
             newPurch.setImagePath(getBytes(img));
-            SimpleDateFormat dt = new SimpleDateFormat("MM-dd-yy hh:mm:ss a");
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
             Date cur = new Date();
-            newPurch.setTimeOPurch(dt.format(cur));
+            newPurch.setTimeOPurch(df.format(cur));
             db.Insert(newPurch);
             db.GetAllRecords();
             Toasty.success(this, "Submited.",

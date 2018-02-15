@@ -4,107 +4,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pennypincher.cps496.cmich.edu.pennypincher.Form"
-    android:background="@color/dark_slate_gray">
+    android:background="@color/dark_slate_gray"
+    tools:context="pennypincher.cps496.cmich.edu.pennypincher.Form">
 
     <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         app:cardBackgroundColor="@color/cardDark"
         app:cardCornerRadius="10dp"
-        app:cardElevation="12dp"
+        app:cardElevation="15dp"
         app:contentPaddingBottom="30dp">
 
-        <android.support.constraint.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/relativeLayout">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/thumb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="151dp"
-                android:layout_marginStart="152dp"
-                android:layout_marginTop="40dp"
-                android:paddingBottom="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:color/white" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="152dp"
-                android:text="Category:"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/category"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/thumb" />
+                <ImageView
+                    android:id="@+id/thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="151dp"
+                    android:layout_marginStart="152dp"
+                    android:layout_marginTop="40dp"
+                    android:paddingBottom="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:color/white" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="Price:"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/price"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="152dp"
+                    android:text="Category:"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/category"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/thumb" />
 
-            <EditText
-                android:id="@+id/price"
-                android:layout_width="164dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:textColor="@android:color/white"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Price:"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/price"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <Spinner
-                android:id="@+id/category"
-                android:layout_width="104dp"
-                android:layout_height="32dp"
-                android:layout_marginBottom="32dp"
-                android:layout_marginEnd="44dp"
-                android:layout_marginTop="161dp"
-                app:layout_constraintBottom_toTopOf="@+id/price"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/thumb"
-                app:layout_constraintVertical_bias="1.0" />
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="60dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="40dp"
-                android:onClick="EnterData"
-                android:text="Save Receipt"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
-        </android.support.constraint.ConstraintLayout>
+                <Spinner
+                    android:id="@+id/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="161dp"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@+id/price"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/thumb"
+                    app:layout_constraintVertical_bias="1.0" />
 
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/roundedbutton"
+                    android:onClick="EnterData"
+                    android:text="Save Receipt"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price" />
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>

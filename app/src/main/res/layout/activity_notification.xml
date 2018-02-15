@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/StatusBack"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="pennypincher.cps496.cmich.edu.pennypincher.NotificationActivity">
+
+    <!--Create landscape view to display the information-->
+
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:fadingEdgeLength="5dp"
+        app:cardBackgroundColor="@color/cardDark"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="12dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_marginTop="-35dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/IVGif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="350dp"
+                    android:contentDescription="Budget Status"
+                    android:scaleType="centerInside" />
+
+                <RelativeLayout
+                    android:id="@+id/Money"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_below="@+id/IVGif">
+
+                    <LinearLayout
+                        android:id="@+id/SpentLay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/Spent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Money Spent"
+                            android:textSize="12pt" />
+
+                        <TextView
+                            android:id="@+id/Spent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:text="Spent"
+                            android:textSize="10pt" />
+
+                    </LinearLayout>
+
+                    <!--Add a button that will take the user back to the home screen-->
+
+
+                    <LinearLayout
+                        android:id="@+id/BudgetLay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Budget Set"
+                            android:textSize="12pt" />
+
+                        <TextView
+                            android:id="@+id/Budget"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="Budget"
+                            android:textSize="10pt" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/OULay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Money"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/OverUnderLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Over-Under Budget"
+                        android:textSize="15pt" />
+
+                    <TextView
+                        android:id="@+id/OverUnder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Amount"
+                        android:textSize="12pt" />
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Budget Dashboard"
+                    android:textSize="6pt"
+                    android:layout_below="@+id/OULay"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/roundedbutton"
+                    android:onClick="Back2Home"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
